@@ -1,0 +1,82 @@
+name: '📝 Log Decision'
+description: 'Record a design decision, especially when surprised by data'
+title: '[DECISION] '
+labels: ['decision', 'evidence']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Decision Log Entry
+
+        **Why this matters:** Decisions are data. Recording what you decided and WHY creates a searchable history of your team's learning.
+
+        Especially valuable when:
+        - Data surprised you (prediction ≠ actual)
+        - You're changing direction based on evidence
+        - You're making a trade-off that future-you needs to understand
+
+  - type: input
+    id: decision
+    attributes:
+      label: 'Decision'
+      description: 'What did you decide?'
+      placeholder: 'Simplify onboarding to 3 steps instead of 5'
+    validations:
+      required: true
+
+  - type: input
+    id: pre_reference
+    attributes:
+      label: 'Related Hypothesis (PRE-XXX)'
+      description: 'Which hypothesis does this relate to? (if any)'
+      placeholder: 'PRE-001'
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 'Context'
+      description: 'What problem were you solving? What options did you consider?'
+      placeholder: 'Users were dropping off at step 3. We considered removing steps vs combining them.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 'Evidence'
+      description: 'What data informed this decision?'
+      placeholder: 'Funnel analysis showed 40% drop at step 3. User interviews cited "too many questions".'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surprised
+    attributes:
+      label: 'Were you surprised?'
+      description: 'Did the data match your prediction?'
+      options:
+        - 'Yes — data contradicted our assumption'
+        - 'No — data confirmed what we expected'
+        - 'Partially — some aspects were unexpected'
+    validations:
+      required: true
+
+  - type: textarea
+    id: learning
+    attributes:
+      label: 'What did you learn?'
+      description: 'If surprised, what assumption was wrong? What do you know now?'
+      placeholder: 'We assumed more questions = better qualification. Actually, friction > qualification benefit.'
+    validations:
+      required: false
+
+  - type: textarea
+    id: next_steps
+    attributes:
+      label: 'Next Steps'
+      description: 'What will you do based on this decision?'
+      placeholder: 'Ship simplified flow, monitor completion rate for 2 weeks.'
+    validations:
+      required: true

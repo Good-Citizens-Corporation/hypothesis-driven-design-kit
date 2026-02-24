@@ -1,0 +1,103 @@
+name: '👁️ Record Observation'
+description: 'Log an observation session or data collection event'
+title: '[OBS] '
+labels: ['observation', 'evidence']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Observation
+
+        Record structured observation data from user sessions, testing, or data collection.
+
+        After submission, a workflow will:
+        1. Generate a session ID
+        2. Append to `evidence-packet/observation_events.csv`
+        3. Close this issue
+
+  - type: input
+    id: pre_reference
+    attributes:
+      label: 'Related Hypothesis (PRE-XXX)'
+      description: 'Which hypothesis does this observation support?'
+      placeholder: 'PRE-001'
+    validations:
+      required: false
+
+  - type: input
+    id: experiment_reference
+    attributes:
+      label: 'Related Experiment'
+      description: 'Which experiment is this part of?'
+      placeholder: '#42 or EXP-001'
+    validations:
+      required: false
+
+  - type: dropdown
+    id: observation_type
+    attributes:
+      label: 'Observation Type'
+      options:
+        - User session (live observation)
+        - Session recording review
+        - Usability test
+        - A/B test data pull
+        - Survey results
+        - Analytics snapshot
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: participants
+    attributes:
+      label: 'Participants / Sample Size'
+      description: 'How many users/sessions/responses?'
+      placeholder: '5 users, 100 sessions, n=47 survey responses'
+    validations:
+      required: true
+
+  - type: textarea
+    id: key_findings
+    attributes:
+      label: 'Key Findings'
+      description: 'What did you observe? Include specific numbers where possible.'
+      placeholder: |
+        - 3/5 users struggled with step 2
+        - Average completion time: 4m 32s
+        - 2 users mentioned "too many questions"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: supports_hypothesis
+    attributes:
+      label: 'Does this support the hypothesis?'
+      options:
+        - Yes — evidence supports the hypothesis
+        - No — evidence contradicts the hypothesis
+        - Mixed — some support, some contradiction
+        - Inconclusive — not enough signal
+        - N/A — exploratory observation
+    validations:
+      required: true
+
+  - type: textarea
+    id: quotes_artifacts
+    attributes:
+      label: 'Quotes / Artifacts'
+      description: 'Notable quotes, screenshots, or links to recordings'
+      placeholder: |
+        > "I don't understand why you need my phone number" — P3
+        [Session recording link]
+    validations:
+      required: false
+
+  - type: textarea
+    id: implications
+    attributes:
+      label: 'Implications'
+      description: 'What should we do based on this observation?'
+      placeholder: 'Consider removing phone number field or adding explanation of why it is needed.'
+    validations:
+      required: false

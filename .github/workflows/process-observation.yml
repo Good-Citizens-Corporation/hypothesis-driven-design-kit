@@ -1,0 +1,122 @@
+name: Process Observation
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process-observation:
+    if: contains(github.event.issue.labels.*.name, 'observation')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse issue and append to CSV
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issue = context.payload.issue;
+            const body = issue.body;
+
+            // Parse form fields from issue body
+            const parseField = (label) => {
+              const regex = new RegExp(`### ${label}\\s*\\n\\n([\\s\\S]*?)(?=\\n\\n###|$)`, 'i');
+              const match = body.match(regex);
+              return match ? match[1].trim() : '';
+            };
+
+            const preRef = parseField('Related Hypothesis \\(PRE-XXX\\)');
+            const expRef = parseField('Related Experiment');
+            const obsType = parseField('Observation Type');
+            const participants = parseField('Participants / Sample Size');
+            const findings = parseField('Key Findings').replace(/"/g, '""').replace(/\n/g, ' ');
+            const supports = parseField('Does this support the hypothesis\\?');
+            const quotes = parseField('Quotes / Artifacts').replace(/"/g, '""').replace(/\n/g, ' ');
+            const implications = parseField('Implications').replace(/"/g, '""').replace(/\n/g, ' ');
+
+            // Determine CSV path
+            const csvPath = 'evidence-packet/observation_events.csv';
+
+            if (!fs.existsSync(csvPath)) {
+              core.setFailed(
+                `📁 Can't find ${csvPath}\n\n` +
+                `This usually means the evidence-packet wasn't set up yet.\n\n` +
+                `Quick fix:\n` +
+                `  1. Create the file: evidence-packet/observation_events.csv\n` +
+                `  2. Add the header row (see evidence-packet/README.md)\n` +
+                `  3. Re-open this issue to trigger the workflow\n\n` +
+                `Observations are the raw material of insight — don't let them get lost!`
+              );
+              return;
+            }
+
+            // Read existing CSV to determine next session ID
+            const csvContent = fs.readFileSync(csvPath, 'utf8');
+            const lines = csvContent.trim().split('\n');
+            const existingIds = lines.slice(1).map(line => {
+              const match = line.match(/^OBS-(\d+)/);
+              return match ? parseInt(match[1]) : 0;
+            });
+            const nextId = Math.max(0, ...existingIds) + 1;
+            const sessionId = `OBS-${String(nextId).padStart(3, '0')}`;
+
+            // Create new row
+            const timestamp = new Date().toISOString();
+            const newRow = `${sessionId},${timestamp},${preRef},${expRef},"${obsType}","${participants}","${findings}","${supports}","${quotes}","${implications}"`;
+
+            // Append to CSV
+            fs.appendFileSync(csvPath, '\n' + newRow);
+
+            console.log(`Created ${sessionId} in ${csvPath}`);
+
+            // Store for later steps
+            core.exportVariable('SESSION_ID', sessionId);
+            core.exportVariable('CSV_PATH', csvPath);
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$CSV_PATH"
+          git commit -m "evidence: record observation $SESSION_ID"
+          git push
+
+      - name: Close issue with ID
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const sessionId = process.env.SESSION_ID;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                `## ✅ Observation recorded as \`${sessionId}\``,
+                ``,
+                `Your observation is now part of the evidence packet.`,
+                ``,
+                `**What you captured:**`,
+                `- A moment of learning that might otherwise be lost`,
+                `- Evidence that connects to your hypothesis`,
+                `- Context that future-you will thank you for`,
+                ``,
+                `> 🔍 Good observations accumulate into defensible decisions.`,
+                `> Keep logging what you see — patterns will emerge.`,
+                ``,
+                `— Recorded in \`evidence-packet/observation_events.csv\``
+              ].join('\n')
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });

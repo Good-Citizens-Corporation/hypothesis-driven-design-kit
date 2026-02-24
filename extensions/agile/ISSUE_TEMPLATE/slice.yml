@@ -1,0 +1,77 @@
+name: 'SLICE'
+description: 'An atomic, shippable increment (<8h estimated)'
+title: 'SLICE: '
+labels: ['slice']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## SLICE Template
+
+        A SLICE is the smallest shippable unit of work. Each SLICE should be:
+        - Completable in <8 hours
+        - Independently valuable (or clearly incremental)
+        - Testable
+
+  - type: input
+    id: parent
+    attributes:
+      label: 'Parent EPIC'
+      description: 'Which EPIC does this belong to?'
+      placeholder: '#42'
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 'What needs to be done?'
+      description: 'Clear, specific description'
+      placeholder: 'Implement the onboarding step 1 UI with email validation'
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 'Acceptance Criteria'
+      description: 'Definition of done'
+      placeholder: |
+        - [ ] User can enter email
+        - [ ] Email validation shows inline errors
+        - [ ] "Next" button enabled only when valid
+        - [ ] Works on mobile (375px+)
+    validations:
+      required: true
+
+  - type: input
+    id: estimate
+    attributes:
+      label: 'Estimate (hours)'
+      description: 'Should be <8h. If larger, break it down.'
+      placeholder: '4'
+    validations:
+      required: true
+
+  - type: textarea
+    id: invest
+    attributes:
+      label: 'INVEST Check (Quick)'
+      description: 'Confirm this SLICE follows INVEST'
+      value: |
+        - [ ] **Independent**: Can ship without waiting on other SLICEs
+        - [ ] **Valuable**: Delivers increment toward EPIC goal
+        - [ ] **Estimable**: Time estimate is confident
+        - [ ] **Small**: <8 hours
+        - [ ] **Testable**: Acceptance criteria are verifiable
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 'Notes'
+      description: 'Dependencies, design links, technical notes'
+      placeholder: 'Design spec: [Figma link]. Depends on API endpoint from backend team.'
+    validations:
+      required: false

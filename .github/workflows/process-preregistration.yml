@@ -1,0 +1,121 @@
+name: Process Pre-registration
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process-preregistration:
+    if: contains(github.event.issue.labels.*.name, 'pre-registration')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse issue and append to CSV
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issue = context.payload.issue;
+            const body = issue.body;
+
+            // Parse form fields from issue body
+            const parseField = (label) => {
+              const regex = new RegExp(`### ${label}\\s*\\n\\n([\\s\\S]*?)(?=\\n\\n###|$)`, 'i');
+              const match = body.match(regex);
+              return match ? match[1].trim() : '';
+            };
+
+            const hypothesis = parseField('Hypothesis').replace(/"/g, '""').replace(/\n/g, ' ');
+            const primaryMetric = parseField('Primary Metric');
+            const baseline = parseField('Baseline / Current State').replace(/"/g, '""').replace(/\n/g, ' ');
+            const successThreshold = parseField('Success Threshold');
+            const falsification = parseField('Falsification Criteria').replace(/"/g, '""').replace(/\n/g, ' ');
+            const timeline = parseField('Evaluation Timeline');
+
+            // Determine CSV path
+            const csvPath = 'evidence-packet/pre_registrations.csv';
+
+            if (!fs.existsSync(csvPath)) {
+              core.setFailed(
+                `📁 Can't find ${csvPath}\n\n` +
+                `This usually means the evidence-packet wasn't set up yet.\n\n` +
+                `Quick fix:\n` +
+                `  1. Create the file: evidence-packet/pre_registrations.csv\n` +
+                `  2. Add the header row (see evidence-packet/README.md)\n` +
+                `  3. Re-open this issue to trigger the workflow\n\n` +
+                `The evidence packet is where your experimental record lives — it's what makes your work defensible!`
+              );
+              return;
+            }
+
+            // Read existing CSV to determine next PRE ID
+            const csvContent = fs.readFileSync(csvPath, 'utf8');
+            const lines = csvContent.trim().split('\n');
+            const existingIds = lines.slice(1).map(line => {
+              const match = line.match(/^PRE-(\d+)/);
+              return match ? parseInt(match[1]) : 0;
+            });
+            const nextId = Math.max(0, ...existingIds) + 1;
+            const regId = `PRE-${String(nextId).padStart(3, '0')}`;
+
+            // Create new row
+            const timestamp = new Date().toISOString();
+            const newRow = `${regId},${timestamp},"${hypothesis}",${primaryMetric},"${baseline}",${successThreshold},"${falsification}",${timeline},registered,,`;
+
+            // Append to CSV
+            fs.appendFileSync(csvPath, '\n' + newRow);
+
+            console.log(`Created ${regId} in ${csvPath}`);
+
+            // Store for later steps
+            core.exportVariable('REG_ID', regId);
+            core.exportVariable('CSV_PATH', csvPath);
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$CSV_PATH"
+          git commit -m "evidence: pre-register $REG_ID"
+          git push
+
+      - name: Close issue with ID
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const regId = process.env.REG_ID;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                `## ✅ Hypothesis registered as \`${regId}\``,
+                ``,
+                `Your hypothesis is now part of the evidence packet.`,
+                ``,
+                `**What happens next:**`,
+                `1. Build your experiment (reference \`${regId}\` in your PR description)`,
+                `2. Ship it and collect data`,
+                `3. Log observations as you learn`,
+                `4. Record your decision when you have enough evidence`,
+                ``,
+                `> 🎯 By pre-registering, you've committed to evaluating this honestly.`,
+                `> This is what separates experiments from wishful thinking.`,
+                ``,
+                `— Recorded in \`evidence-packet/pre_registrations.csv\``
+              ].join('\n')
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });

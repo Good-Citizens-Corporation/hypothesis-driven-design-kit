@@ -1,0 +1,78 @@
+name: '🧪 Experiment'
+description: 'A testable hypothesis with measurable outcomes'
+title: '[EXP] '
+labels: ['experiment']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Experiment
+
+        An experiment is a bounded piece of work designed to test a hypothesis.
+        
+        **Before creating this:** You should have a pre-registered hypothesis (`PRE-XXX`).
+
+  - type: input
+    id: pre_reference
+    attributes:
+      label: 'Hypothesis Reference'
+      description: 'Which pre-registered hypothesis does this test?'
+      placeholder: 'PRE-001'
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: 'Objective'
+      description: 'What are you trying to learn or validate?'
+      placeholder: 'Validate that simplified onboarding increases completion rate.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: 'Approach'
+      description: 'How will you test this? What will you build/change?'
+      placeholder: |
+        - Reduce onboarding from 5 steps to 3
+        - A/B test with 50% of new users
+        - Run for 2 weeks minimum
+    validations:
+      required: true
+
+  - type: textarea
+    id: success_criteria
+    attributes:
+      label: 'Success Criteria'
+      description: 'How will you know if the experiment succeeded? Reference your PRE-XXX thresholds.'
+      placeholder: |
+        - Completion rate ≥80% (baseline: 60%)
+        - No increase in support tickets
+        - User satisfaction maintained ≥4.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: measurement
+    attributes:
+      label: 'Measurement Plan'
+      description: 'How will you collect data? What tools/methods?'
+      placeholder: |
+        - Analytics: Mixpanel funnel events
+        - Qualitative: 5 user interviews post-completion
+        - Timeline: Evaluate after 14 days or 200 users
+    validations:
+      required: true
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: 'Risks & Mitigations'
+      description: 'What could go wrong? How will you limit blast radius?'
+      placeholder: |
+        - Risk: Removing fields loses qualification data
+        - Mitigation: Log abandoned field data for 30 days
+    validations:
+      required: false

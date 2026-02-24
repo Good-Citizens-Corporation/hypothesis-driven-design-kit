@@ -1,0 +1,52 @@
+name: '📦 Work Item'
+description: 'A deliverable that contributes to an experiment'
+title: '[WORK] '
+labels: ['work-item']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Work Item
+
+        A discrete piece of work that contributes to an experiment. 
+        Should be small enough to complete in a few days.
+
+  - type: input
+    id: parent
+    attributes:
+      label: 'Parent Experiment'
+      description: 'Which experiment does this contribute to?'
+      placeholder: '#42 or EXP-001'
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 'What needs to be done?'
+      description: 'Clear description of the deliverable'
+      placeholder: 'Implement 3-step onboarding flow UI with form validation'
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 'Acceptance Criteria'
+      description: 'How do we know this is done?'
+      placeholder: |
+        - [ ] User can complete onboarding in 3 steps
+        - [ ] Form validates email and password
+        - [ ] Progress indicator shows current step
+        - [ ] Works on mobile (375px+)
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 'Notes'
+      description: 'Any additional context, dependencies, or considerations'
+      placeholder: 'Depends on #41 for API endpoint. Design spec in Figma link.'
+    validations:
+      required: false

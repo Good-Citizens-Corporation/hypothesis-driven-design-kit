@@ -1,0 +1,98 @@
+name: 'EPIC'
+description: 'A large, independently valuable feature that follows INVEST principles'
+title: 'EPIC: '
+labels: ['epic']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## EPIC Template
+
+        EPICs are hypothesis-driven features that follow INVEST principles.
+        
+        **Before creating this:** Pre-register your hypothesis (`PRE-XXX`).
+
+  - type: input
+    id: pre_reference
+    attributes:
+      label: 'Pre-Registration Reference'
+      description: 'Link to PRE-XXX in evidence-packet/pre_registrations.csv'
+      placeholder: 'PRE-001'
+    validations:
+      required: true
+
+  - type: textarea
+    id: jtbd
+    attributes:
+      label: 'Job To Be Done'
+      description: 'Who benefits, what they want, why it matters'
+      placeholder: |
+        When I'm [situation/context],
+        I want to [action/capability],
+        So I can [outcome/benefit].
+    validations:
+      required: true
+
+  - type: textarea
+    id: invest
+    attributes:
+      label: 'INVEST Check'
+      description: 'Confirm each criterion is met'
+      value: |
+        | Criterion | Status | Evidence |
+        |-----------|--------|----------|
+        | **Independent** | ⬜ | |
+        | **Negotiable** | ⬜ | |
+        | **Valuable** | ⬜ | |
+        | **Estimable** | ⬜ | |
+        | **Small** | ⬜ | |
+        | **Testable** | ⬜ | |
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: 'Verification Criteria (Build It Right)'
+      description: 'Technical correctness checks'
+      placeholder: |
+        | ID | Criterion | Threshold | Method |
+        |----|-----------|-----------|--------|
+        | VC-01 | Performance | <2s LCP | Lighthouse |
+        | VC-02 | Accessibility | WCAG AA | axe-core |
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: 'Validation Criteria (Build The Right Thing)'
+      description: 'User/business outcome checks — reference your PRE-XXX thresholds'
+      placeholder: |
+        | ID | Criterion | Threshold | Method |
+        |----|-----------|-----------|--------|
+        | VL-01 | Completion rate | ≥80% | Analytics |
+        | VL-02 | Satisfaction | ≥4.0 | Survey |
+    validations:
+      required: true
+
+  - type: input
+    id: estimate
+    attributes:
+      label: 'Estimate'
+      description: 'Rough total estimate in hours/days'
+      placeholder: '40-60 hours'
+    validations:
+      required: true
+
+  - type: textarea
+    id: slices
+    attributes:
+      label: 'SLICE Breakdown'
+      description: 'List the atomic increments (each <8h)'
+      placeholder: |
+        - [ ] SLICE-01: Setup and scaffolding (~4h)
+        - [ ] SLICE-02: Core feature implementation (~6h)
+        - [ ] SLICE-03: Testing and polish (~4h)
+    validations:
+      required: false

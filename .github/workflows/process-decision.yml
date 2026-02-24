@@ -1,0 +1,110 @@
+name: Process Decision
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process-decision:
+    if: contains(github.event.issue.labels.*.name, 'decision')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse issue and append to CSV
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issue = context.payload.issue;
+            const body = issue.body;
+
+            // Parse form fields from issue body
+            const parseField = (label) => {
+              const regex = new RegExp(`### ${label}\\s*\\n\\n([\\s\\S]*?)(?=\\n\\n###|$)`, 'i');
+              const match = body.match(regex);
+              return match ? match[1].trim() : '';
+            };
+
+            const decision = parseField('Decision').replace(/"/g, '""');
+            const preRef = parseField('Related Hypothesis \\(PRE-XXX\\)');
+            const context_field = parseField('Context').replace(/"/g, '""').replace(/\n/g, ' ');
+            const evidence = parseField('Evidence').replace(/"/g, '""').replace(/\n/g, ' ');
+            const surprised = parseField('Were you surprised\\?');
+            const learning = parseField('What did you learn\\?').replace(/"/g, '""').replace(/\n/g, ' ');
+            const nextSteps = parseField('Next Steps').replace(/"/g, '""').replace(/\n/g, ' ');
+
+            // Determine CSV path
+            const csvPath = 'evidence-packet/decision_log.csv';
+
+            if (!fs.existsSync(csvPath)) {
+              core.setFailed(
+                `📁 Can't find ${csvPath}\n\n` +
+                `This usually means the evidence-packet wasn't set up yet.\n\n` +
+                `Quick fix:\n` +
+                `  1. Create the file: evidence-packet/decision_log.csv\n` +
+                `  2. Add the header row (see evidence-packet/README.md)\n` +
+                `  3. Re-open this issue to trigger the workflow\n\n` +
+                `Decision logging helps future-you understand why past-you made this call!`
+              );
+              return;
+            }
+
+            // Create new row
+            const date = new Date().toISOString().split('T')[0];
+            const newRow = `${date},"${decision}",${preRef},"${context_field}","${evidence}","${surprised}","${learning}","${nextSteps}"`;
+
+            // Append to CSV
+            fs.appendFileSync(csvPath, '\n' + newRow);
+
+            console.log(`Logged decision to ${csvPath}`);
+
+            // Store for later steps
+            core.exportVariable('CSV_PATH', csvPath);
+            core.exportVariable('DATE', date);
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$CSV_PATH"
+          git commit -m "evidence: log decision ($DATE)"
+          git push
+
+      - name: Close issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const date = process.env.DATE;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                `## ✅ Decision logged`,
+                ``,
+                `Your decision is now part of the evidence packet.`,
+                ``,
+                `**Why this matters:**`,
+                `Six months from now, when someone asks "why did we do it that way?",`,
+                `this record will tell the story — complete with the context and evidence`,
+                `that made this the right call at the time.`,
+                ``,
+                `> 📝 Decisions aren't just outcomes; they're learning artifacts.`,
+                ``,
+                `— Recorded ${date} in \`evidence-packet/decision_log.csv\``
+              ].join('\n')
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });

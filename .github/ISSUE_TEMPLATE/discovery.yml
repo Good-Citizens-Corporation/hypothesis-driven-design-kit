@@ -1,0 +1,70 @@
+name: '🔍 Discovery'
+description: 'Research to establish baseline, explore options, or define measurement'
+title: '[DISC] '
+labels: ['discovery', 'research']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Discovery
+
+        Discovery work gathers information BEFORE forming a hypothesis.
+        
+        Use this for:
+        - Establishing baselines
+        - User research / interviews
+        - Technical feasibility assessment
+        - Defining metrics and measurement approaches
+
+        **Output:** Discovery should result in either a pre-registered hypothesis or a documented decision NOT to proceed.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: 'Research Question'
+      description: 'What are you trying to learn?'
+      placeholder: 'What is the current onboarding completion rate? Where do users drop off?'
+    validations:
+      required: true
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: 'Approach'
+      description: 'How will you gather this information?'
+      placeholder: |
+        - Pull analytics data for last 30 days
+        - Review session recordings of drop-offs
+        - Interview 5 users who abandoned onboarding
+    validations:
+      required: true
+
+  - type: input
+    id: timebox
+    attributes:
+      label: 'Timebox'
+      description: 'Maximum time to spend on this discovery'
+      placeholder: '2 days, 1 week, 8 hours'
+    validations:
+      required: true
+
+  - type: textarea
+    id: outputs
+    attributes:
+      label: 'Expected Outputs'
+      description: 'What will you deliver when this is complete?'
+      placeholder: |
+        - Funnel analysis with drop-off points
+        - Summary of user interview findings
+        - Recommendation: proceed with hypothesis or not
+    validations:
+      required: true
+
+  - type: textarea
+    id: next_steps
+    attributes:
+      label: 'Possible Next Steps'
+      description: 'If findings are positive, what hypothesis might you form?'
+      placeholder: 'If we find significant drop-off at step 3, we may hypothesize that reducing steps increases completion.'
+    validations:
+      required: false

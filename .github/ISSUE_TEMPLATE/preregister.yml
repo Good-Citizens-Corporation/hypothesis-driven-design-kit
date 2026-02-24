@@ -1,0 +1,77 @@
+name: '🔬 Pre-register Hypothesis'
+description: 'Lock your prediction BEFORE building. This is the core of HDD.'
+title: '[PRE] '
+labels: ['hypothesis', 'pre-registration']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Pre-registration
+
+        **Why this matters:** Pre-registration prevents cherry-picking. You commit to what you're testing and what "wrong" looks like BEFORE you see results.
+
+        After submission, a workflow will:
+        1. Assign a `PRE-XXX` ID
+        2. Append to `evidence-packet/pre_registrations.csv`
+        3. Close this issue (the CSV is your record)
+
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: 'Hypothesis'
+      description: 'What do you believe will happen? Be specific and measurable.'
+      placeholder: |
+        We believe that [intervention/change]
+        will result in [measurable outcome]
+        for [target users/context].
+    validations:
+      required: true
+
+  - type: input
+    id: primary_metric
+    attributes:
+      label: 'Primary Metric'
+      description: 'The ONE metric you will use to evaluate success'
+      placeholder: 'conversion_rate, time_on_task, error_count, satisfaction_score'
+    validations:
+      required: true
+
+  - type: textarea
+    id: baseline
+    attributes:
+      label: 'Baseline / Current State'
+      description: 'What is the current value or situation? How will you establish this?'
+      placeholder: 'Current conversion rate is 3.2% based on last 30 days of data.'
+    validations:
+      required: true
+
+  - type: input
+    id: success_threshold
+    attributes:
+      label: 'Success Threshold'
+      description: 'What specific result would confirm your hypothesis?'
+      placeholder: '≥20% improvement, >4.0 satisfaction, <2s load time'
+    validations:
+      required: true
+
+  - type: textarea
+    id: falsification
+    attributes:
+      label: 'Falsification Criteria'
+      description: 'What specific result would DISPROVE your hypothesis? This is required.'
+      placeholder: |
+        This hypothesis is FALSE if:
+        - Metric shows <5% improvement
+        - Negative side effects appear (specify)
+        - No measurable change after [timeframe]
+    validations:
+      required: true
+
+  - type: input
+    id: timeline
+    attributes:
+      label: 'Evaluation Timeline'
+      description: 'When will you evaluate results?'
+      placeholder: '2 weeks after launch, end of sprint, after 100 users'
+    validations:
+      required: true

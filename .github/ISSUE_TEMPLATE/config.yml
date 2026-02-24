@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit#readme
+    about: Learn how to use hypothesis-driven design
+  - name: 📊 Submit Your Results
+    url: https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-results/issues/new/choose
+    about: Share what you learned with the community

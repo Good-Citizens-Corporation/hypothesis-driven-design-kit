@@ -1,0 +1,81 @@
+name: Require Pre-registration
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-preregistration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for PRE-XXX reference
+        run: |
+          # Get PR body
+          PR_BODY="${{ github.event.pull_request.body }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
+
+          # Check if this is an experiment/feature PR (not just chore/docs)
+          if echo "$PR_TITLE" | grep -qiE '^(chore|docs|style|ci|test):'; then
+            echo "✅ Non-experiment PR, skipping pre-registration check"
+            exit 0
+          fi
+
+          # Check if PR references a PRE-XXX
+          if echo "$PR_BODY" | grep -qE 'PRE-[0-9]+'; then
+            REG_ID=$(echo "$PR_BODY" | grep -oE 'PRE-[0-9]+' | head -1)
+            echo "Found reference: $REG_ID"
+            
+            # Verify it exists in the CSV
+            if grep -q "^$REG_ID," evidence-packet/pre_registrations.csv 2>/dev/null; then
+              echo "✅ Pre-registration $REG_ID verified — nice work!"
+              exit 0
+            else
+              echo "🔍 Almost there! You referenced $REG_ID, but it's not in evidence-packet/pre_registrations.csv yet."
+              echo ""
+              echo "Why this matters:"
+              echo "  Pre-registering hypotheses BEFORE coding prevents us from"
+              echo "  unconsciously fitting our goals to whatever we happened to build."
+              echo "  It's the difference between 'I predicted this' and 'I wish I'd predicted this.'"
+              echo ""
+              echo "Quick fix:"
+              echo "  1. Go to Issues → New Issue → 🔬 Pre-register Hypothesis"
+              echo "  2. Fill in your hypothesis (you probably already know it!)"
+              echo "  3. The workflow will create $REG_ID automatically"
+              echo "  4. Re-run this check"
+              echo ""
+              echo "This takes ~2 minutes and makes your evidence defensible. You've got this! 💪"
+              exit 1
+            fi
+          fi
+
+          # No PRE-XXX found
+          echo "👋 Hey! This PR is missing a hypothesis reference (PRE-XXX)."
+          echo ""
+          echo "Why we do this:"
+          echo "  Every feature is an experiment. Pre-registering your hypothesis"
+          echo "  BEFORE shipping lets you honestly evaluate whether it worked."
+          echo "  Without it, we're just hoping — and hope isn't a strategy."
+          echo ""
+          echo "To continue, pick one:"
+          echo ""
+          echo "  📊 If this tests a hypothesis:"
+          echo "     1. Go to Issues → New Issue → 🔬 Pre-register Hypothesis"
+          echo "     2. State what you believe will happen and how you'll measure it"
+          echo "     3. Add the PRE-XXX ID anywhere in your PR description"
+          echo ""
+          echo "     Example PR description:"
+          echo "       ## Changes"
+          echo "       Simplifies onboarding from 5 steps to 3"
+          echo "       "
+          echo "       Hypothesis: PRE-001"
+          echo ""
+          echo "  🔧 If this is NOT an experiment:"
+          echo "     Prefix your PR title with: chore:, docs:, style:, ci:, or test:"
+          echo "     (These skip hypothesis checks — they're not behavior changes.)"
+          echo ""
+          echo "Questions? This process helps us learn from our work, not just ship it."
+          exit 1
