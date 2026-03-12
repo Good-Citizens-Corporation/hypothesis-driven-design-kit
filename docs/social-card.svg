@@ -1,0 +1,50 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22d3ee"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  
+  <!-- Accent bar -->
+  <rect x="0" y="0" width="1280" height="6" fill="url(#accent)"/>
+  
+  <!-- Test tube icon -->
+  <g transform="translate(100, 240)">
+    <!-- Test tube -->
+    <g transform="translate(30, 20)">
+      <!-- Tube body -->
+      <path d="M12 0 L12 65 Q12 85 25 85 Q38 85 38 65 L38 0" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+      <!-- Tube rim -->
+      <path d="M6 0 L44 0" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+      <!-- Liquid -->
+      <path d="M15 45 L15 62 Q15 80 25 80 Q35 80 35 62 L35 45" fill="#a78bfa" opacity="0.6"/>
+      <!-- Bubbles -->
+      <circle cx="21" cy="55" r="3" fill="#ffffff" opacity="0.7"/>
+      <circle cx="30" cy="62" r="2" fill="#ffffff" opacity="0.5"/>
+      <circle cx="24" cy="70" r="2.5" fill="#ffffff" opacity="0.6"/>
+    </g>
+  </g>
+  
+  <!-- Main title -->
+  <text x="240" y="280" font-family="Test Signifier, sans-serif" font-size="68" font-weight="900" fill="#ffffff">
+    HYPOTHESIS-DRIVEN
+  </text>
+  <text x="240" y="350" font-family="Test Signifier, sans-serif" font-size="68" font-weight="900" fill="#ffffff">
+    DESIGN KIT
+  </text>
+  
+  <!-- Tagline -->
+  <text x="240" y="420" font-family="Test Signifier, sans-serif" font-size="37" font-weight="100" fill="#ffffff" opacity="0.5">
+    Stop shipping features. Start learning.
+  </text>
+  
+
+</svg>

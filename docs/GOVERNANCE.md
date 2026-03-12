@@ -28,6 +28,31 @@ That's the whole process. Everything else is just making sure we actually do it.
 └─────────────────────────────────────────────────────────────┘
 ```
 
+## Traceability (V&V)
+
+For rigorous evidence, we maintain full traceability from inputs through outputs to evidence:
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  DESIGN INPUT   │────▶│  DESIGN OUTPUT  │────▶│    EVIDENCE     │
+│    (PRE-###)    │     │    (DO-###)     │     │  (OBS-###, etc) │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+        │                       │                       │
+        │                       │                       │
+        ▼                       ▼                       ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        TRACE MATRIX                             │
+│         Links every input to its output and evidence            │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+| Artifact | Purpose | ID Format |
+|----------|---------|------------|
+| Design Input | Acceptance criteria defined before building | PRE-### |
+| Design Output | What was built to satisfy each input | DO-### |
+| Trace Matrix | Links Input → Output → Evidence | TRC-### |
+| Decision Log | Timestamped choices with rationale | — |
+
 ### Step 1: Guess (Pre-registration)
 
 Before you build anything, answer:
@@ -93,6 +118,36 @@ Every guess you make gets saved here.
 | `status` | registered → validated / falsified / abandoned |
 | `outcome_logged_at` | When you checked the results |
 | `outcome_notes` | What actually happened |
+
+### Design Outputs (`design_outputs.csv`)
+
+What you actually built to satisfy each design input.
+
+| Column | What it means |
+|--------|---------------|
+| `output_id` | The ID (DO-001, DO-002...) |
+| `created_at` | When this output was created |
+| `pre_reference` | Which design input (PRE-###) this satisfies |
+| `specification` | What was built (functional description) |
+| `artifact_type` | Type of artifact (code, config, protocol, etc.) |
+| `artifact_ref` | Link to the artifact (PR, file path, doc link) |
+| `verification_method` | How correctness was verified |
+| `verified_at` | When verification occurred |
+| `verified_by` | Who verified it |
+
+### Trace Matrix (`trace_matrix.csv`)
+
+Maps every design input to its output and supporting evidence.
+
+| Column | What it means |
+|--------|---------------|
+| `trace_id` | The ID (TRC-001, TRC-002...) |
+| `design_input` | The PRE-### being traced |
+| `design_output` | The DO-### that satisfies the input |
+| `evidence_refs` | Comma-separated OBS-###, decision log entries |
+| `verification_status` | pass / fail / pending |
+| `validation_status` | validated / falsified / inconclusive / pending |
+| `notes` | Additional context |
 
 ### Decisions (`decision_log.csv`)
 
