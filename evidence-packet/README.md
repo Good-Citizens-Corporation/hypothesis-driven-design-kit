@@ -6,9 +6,23 @@ This directory contains the evidence artifacts for your hypothesis-driven work.
 
 | File | Purpose | Updated By |
 |------|---------|------------|
-| `pre_registrations.csv` | Locked hypotheses with predictions | 🤖 Workflow (from issue form) |
+| `pre_registrations.csv` | Design inputs — locked hypotheses with predictions | 🤖 Workflow (from issue form) |
+| `design_outputs.csv` | Design outputs — what was built to satisfy each input | ✍️ Manual / 🤖 Workflow |
+| `trace_matrix.csv` | Traceability — links Input → Output → Evidence | ✍️ Manual / 🤖 Workflow |
 | `decision_log.csv` | Design decisions and learnings | 🤖 Workflow (from issue form) |
 | `observation_events.csv` | Structured observation data | 🤖 Workflow (from issue form) |
+
+## Traceability (V&V)
+
+```
+PRE-### (Input) → DO-### (Output) → OBS-### (Evidence)
+                         ↓
+                  trace_matrix.csv
+```
+
+Every design input (PRE-###) should trace to:
+1. A design output (DO-###) — what was built
+2. Evidence (OBS-###, decisions) — proof it works
 
 ## How It Works
 

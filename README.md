@@ -180,7 +180,7 @@ The *methodology* is what matters, not the tooling.
 
 We're collecting community outcomes to validate whether HDD actually works.
 
-**[Submit your results →](https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-results/issues/new/choose)**
+**[Submit your results →](https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit/issues/new/choose)**
 
 What we want to know:
 - Did you discover something surprising?

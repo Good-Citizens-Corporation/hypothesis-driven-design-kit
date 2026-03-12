@@ -6,7 +6,7 @@ We're collecting community outcomes to validate whether hypothesis-driven design
 
 ## How to Submit
 
-**[Submit via GitHub Issue →](https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-results/issues/new/choose)**
+**[Submit via GitHub Issue →](https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit/issues/new/choose)**
 
 Or email: hddvibes@goodcitizens.us
 
