@@ -1,0 +1,130 @@
+name: Process Intake
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process-intake:
+    if: contains(github.event.issue.labels.*.name, 'intake')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse issue and append to CSV
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issue = context.payload.issue;
+            const body = issue.body;
+
+            const parseField = (label) => {
+              const regex = new RegExp(`### ${label}\\s*\\n\\n([\\s\\S]*?)(?=\\n\\n###|$)`, 'i');
+              const match = body.match(regex);
+              return match ? match[1].trim() : '';
+            };
+
+            const artifactType = parseField('Artifact Type');
+            const sourceRef = parseField('Source Reference').replace(/"/g, '""');
+            const author = parseField('Artifact Author / Owner').replace(/"/g, '""');
+            const dangerLevel = parseField('Initial Danger Assessment').split(' — ')[0];
+
+            const csvPath = 'evidence-packet/intake_log.csv';
+
+            if (!fs.existsSync(csvPath)) {
+              core.setFailed(
+                `📁 Can't find ${csvPath}\n\n` +
+                `Create the file with header row first.\n` +
+                `See evidence-packet/README.md for setup.`
+              );
+              return;
+            }
+
+            const csvContent = fs.readFileSync(csvPath, 'utf8');
+            const lines = csvContent.trim().split('\n');
+            const existingIds = lines.slice(1).map(line => {
+              const match = line.match(/^INK-(\d+)/);
+              return match ? parseInt(match[1]) : 0;
+            });
+            const nextId = Math.max(0, ...existingIds) + 1;
+            const inkId = `INK-${String(nextId).padStart(3, '0')}`;
+
+            const timestamp = new Date().toISOString();
+            const newRow = `${inkId},${timestamp},"${artifactType}","${sourceRef}","${author}",${dangerLevel},,,pending,`;
+
+            fs.appendFileSync(csvPath, '\n' + newRow);
+
+            console.log(`Created ${inkId} in ${csvPath}`);
+
+            core.exportVariable('INK_ID', inkId);
+            core.exportVariable('CSV_PATH', csvPath);
+            core.exportVariable('DANGER_LEVEL', dangerLevel);
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$CSV_PATH"
+          git commit -m "evidence: intake $INK_ID"
+          git push
+
+      - name: Comment with ID and next steps
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const inkId = process.env.INK_ID;
+            const dangerLevel = process.env.DANGER_LEVEL;
+
+            const dangerWarning = dangerLevel === 'CRITICAL' || dangerLevel === 'HIGH'
+              ? `\n> ⚠️ **${dangerLevel} danger artifact** — Run Narrative Challenge (Phase 1) before accepting any claims.\n`
+              : '';
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                `## 📥 Artifact logged as \`${inkId}\``,
+                ``,
+                `This artifact is now tracked in the evidence packet.`,
+                dangerWarning,
+                `**Next steps (HDD Analysis):**`,
+                ``,
+                `1. **Phase 1 — Narrative Challenge**`,
+                `   Identify claims without sources. Update the "Narrative Risk Register" section above.`,
+                ``,
+                `2. **Phase 2 — Assumption Extraction**`,
+                `   List hidden assumptions. Update the "Extracted Assumptions" section above.`,
+                ``,
+                `3. **Phase 3 — Confidence Ranking**`,
+                `   Rank assumptions by consequence of being wrong (CRITICAL / SIGNIFICANT / MANAGEABLE).`,
+                ``,
+                `4. **Phase 4 — Hypothesis Generation**`,
+                `   Convert top assumptions to canonical format:`,
+                `   > *We believe [outcome] is achievable if [situation] can get [motivation].*`,
+                ``,
+                `5. **Pre-register hypotheses**`,
+                `   For each hypothesis, create a 🔬 Pre-register Hypothesis issue.`,
+                `   Update the "Generated Hypotheses" section with PRE-XXX references.`,
+                ``,
+                `**When done:** Close this issue. The trace is:`,
+                `\`\`\``,
+                `${inkId} → PRE-XXX → EXP-XXX → Evidence`,
+                `\`\`\``,
+                ``,
+                `— Recorded in \`evidence-packet/intake_log.csv\``
+              ].join('\n')
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              title: `[${inkId}] ${context.payload.issue.title.replace(/^\[INK\]\s*/, '')}`
+            });

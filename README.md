@@ -2,6 +2,9 @@
 
 > Stop shipping features. Start learning.
 
+**[View the V&V Evidence Trace →](https://good-citizens-corporation.github.io/hypothesis-driven-design-kit/)**  
+*The kit validates itself using its own methodology. That's the proof-of-concept.*
+
 ---
 
 ## New Here?
@@ -12,6 +15,8 @@
 | **Get set up and running** (10 min) | [Quick Start](docs/QUICK_START.md) |
 | **See a complete example** (15 min) | [Worked Example](docs/EXAMPLE.md) |
 | **Read the full process** | [How This Works](docs/GOVERNANCE.md) |
+| **Use the Copilot skill** | [Copilot Skill](docs/COPILOT_SKILL.md) |
+| **See the evidence** | [V&V Trace](index.md) |
 
 No prior experience with behavioral design or experimentation required.
 
@@ -194,6 +199,33 @@ What we want to know:
 - [Quick Start Guide](docs/QUICK_START.md)
 - [Governance & Process](docs/GOVERNANCE.md)
 - [Agile Extension](extensions/agile/README.md)
+
+---
+
+## Acknowledgements
+
+This kit stands on the shoulders of people who figured out how to learn honestly.
+
+### Methodology
+
+| Concept | We got it from |
+|---------|---------------|
+| **Pre-registration** | Clinical trials methodology — committing to hypotheses before seeing data to prevent post-hoc rationalization |
+| **Falsification** | Karl Popper — a hypothesis must be capable of being proven wrong to be meaningful |
+| **V&V / Design History File** | NASA and FDA design controls — rigorous traceability from requirements to evidence |
+| **INVEST criteria** | Bill Wake — the checklist that makes user stories actually testable |
+| **Validated learning / MVP** | Eric Ries — learning is the unit of progress, not features |
+| **Jobs to be Done** | Clayton Christensen & Bob Moesta — framing needs as situations, not personas |
+| **Cognitive bias framing** | Daniel Kahneman & Amos Tversky — understanding why we fool ourselves |
+| **Vertical slices** | Kent Beck / Extreme Programming — shipping thin, complete increments |
+| **Concierge / Wizard of Oz** | Lean UX (Jeff Gothelf, Josh Seiden) — testing value before building systems |
+| **Registered reports** | Center for Open Science — fixing science by committing before measuring |
+
+### Community
+
+The folks at [Open Science Framework](https://osf.io/) who proved pre-registration works at scale.
+
+Everyone who's ever said "but how do we know it actually worked?" and meant it.
 
 ---
 

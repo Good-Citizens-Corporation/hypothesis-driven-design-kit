@@ -2,10 +2,25 @@
 
 This directory contains the evidence artifacts for your hypothesis-driven work.
 
+## ⚠️ PII Handling
+
+**Do not use real names in evidence logs.** This packet may be public (GitHub Pages, audits, case studies).
+
+Use role-based pseudonyms:
+- `[DL-001]` — Design Leader
+- `[PM-001]` — Product Manager  
+- `[ENG-001]` — Engineer
+- `[ORG-001]` — External organization
+
+Keep a private mapping file (not in this repo) if you need to trace pseudonyms back to individuals.
+
+---
+
 ## Files
 
 | File | Purpose | Updated By |
 |------|---------|------------|
+| `intake_log.csv` | Source artifacts — PRDs, decks, briefs before analysis | 🤖 Workflow (from issue form) |
 | `pre_registrations.csv` | Design inputs — locked hypotheses with predictions | 🤖 Workflow (from issue form) |
 | `design_outputs.csv` | Design outputs — what was built to satisfy each input | ✍️ Manual / 🤖 Workflow |
 | `trace_matrix.csv` | Traceability — links Input → Output → Evidence | ✍️ Manual / 🤖 Workflow |
@@ -15,22 +30,25 @@ This directory contains the evidence artifacts for your hypothesis-driven work.
 ## Traceability (V&V)
 
 ```
-PRE-### (Input) → DO-### (Output) → OBS-### (Evidence)
-                         ↓
-                  trace_matrix.csv
+INK-### (Artifact) → PRE-### (Hypothesis) → DO-### (Output) → OBS-### (Evidence)
+                                                   ↓
+                                            trace_matrix.csv
 ```
 
-Every design input (PRE-###) should trace to:
-1. A design output (DO-###) — what was built
-2. Evidence (OBS-###, decisions) — proof it works
+The full chain:
+1. **INK-###** — Source artifact arrives (PRD, deck, brief)
+2. **PRE-###** — Hypotheses extracted and pre-registered
+3. **DO-###** — What was built to test each hypothesis
+4. **OBS-###** — Evidence collected during testing
 
 ## How It Works
 
-1. **Pre-register a hypothesis** → Creates `PRE-XXX` entry
-2. **Do your work** → Create experiments and work items
-3. **Collect evidence** → Log observations as you go
-4. **Make decisions** → Record what you learned, especially surprises
-5. **Close the loop** → Update the PRE-XXX status with outcome
+1. **Intake an artifact** → Creates `INK-XXX` entry, run HDD analysis
+2. **Pre-register hypotheses** → Creates `PRE-XXX` entries from the analysis
+3. **Do your work** → Create experiments and work items
+4. **Collect evidence** → Log observations as you go
+5. **Make decisions** → Record what you learned, especially surprises
+6. **Close the loop** → Update the PRE-XXX status with outcome
 
 ## Rules
 
@@ -38,6 +56,22 @@ Every design input (PRE-###) should trace to:
 - **Timestamp everything**: All entries are timestamped automatically
 - **IDs are sequential**: PRE-001, PRE-002, etc.
 - **Falsification required**: Every hypothesis must define what "wrong" looks like
+- **No PII**: Use role-based pseudonyms, not real names (see below)
+
+## PII Handling
+
+Evidence logs are often public. Never use real names. Use pseudonyms:
+
+| Code | Role |
+|------|------|
+| `[DL-001]` | Design Leader |
+| `[PM-001]` | Product Manager |
+| `[ENG-001]` | Engineer |
+| `[ORG-001]` | External Organization |
+
+Increment for multiple individuals: `[PM-001]`, `[PM-002]`. Apply consistently across linked artifacts.
+
+**Private mapping:** Keep a separate file (NOT in this repo) if you need to trace back.
 
 ## Viewing Your Data
 

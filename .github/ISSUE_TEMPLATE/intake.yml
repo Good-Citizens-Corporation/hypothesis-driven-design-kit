@@ -1,0 +1,149 @@
+name: '📥 Artifact Intake'
+description: 'Log a source artifact (PRD, deck, brief) for HDD analysis before hypothesis extraction'
+title: '[INK] '
+labels: ['intake', 'analysis']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Artifact Intake
+
+        **What this is:** The entry point for HDD analysis. Log the source artifact BEFORE extracting hypotheses.
+
+        Every artifact that enters your process gets an `INK-XXX` ID. This creates the traceability chain:
+        ```
+        INK-XXX (artifact) → PRE-XXX (hypothesis) → EXP-XXX (experiment) → Evidence
+        ```
+
+        After submission, a workflow will:
+        1. Assign an `INK-XXX` ID
+        2. Append to `evidence-packet/intake_log.csv`
+        3. Keep this issue OPEN for you to add analysis results
+
+        ---
+
+        **⚠️ PII HANDLING:** Do not use real names in this public log. Use role-based pseudonyms:
+        - `[DL-001]` (Design Leader), `[PM-001]` (Product Manager), `[ENG-001]` (Engineer)
+        - `[ORG-001]` for external organizations if needed
+        - Keep a private mapping if you need to trace back
+
+  - type: dropdown
+    id: artifact_type
+    attributes:
+      label: 'Artifact Type'
+      description: 'What kind of artifact is this?'
+      options:
+        - 'PRD (Product Requirements Document)'
+        - 'Strategy Deck (PPTX/PDF)'
+        - 'Brief / Strategy Doc'
+        - 'Research Report'
+        - 'Journey Map'
+        - 'Persona Set'
+        - 'Competitive Analysis'
+        - 'User Story Collection'
+        - 'Roadmap'
+        - 'Other'
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: 'Source Reference'
+      description: 'Link to the artifact, or describe where it lives. Use pseudonyms for names in filenames.'
+      placeholder: 'https://docs.google.com/... or "Attached below" or "Slack #channel on 2026-03-21"'
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: 'Artifact Author / Owner'
+      description: 'Who created this artifact?'
+      placeholder: 'Product team, @username, External consultant'
+    validations:
+      required: true
+
+  - type: textarea
+    id: artifact_content
+    attributes:
+      label: 'Artifact Content (or Summary)'
+      description: 'Paste the artifact text, or provide a summary if too large. For PPTX, run: python -m markitdown file.pptx'
+      placeholder: |
+        [Paste artifact content here]
+
+        Or summarize: "23-slide strategy deck covering market opportunity, 
+        competitive landscape, and proposed product direction for Q3."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: danger_level
+    attributes:
+      label: 'Initial Danger Assessment'
+      description: 'How risky is this artifact type without hypothesis pairing? (See HDD methodology)'
+      options:
+        - 'CRITICAL — Persuasion structure (strategy deck)'
+        - 'HIGH — Narrative vehicle (journey map, persona, competitive analysis, brief)'
+        - 'MEDIUM-HIGH — Has structure but rarely exercised (PRD)'
+        - 'MEDIUM — Hidden assumptions (user stories)'
+        - 'LOW — Has built-in stopping conditions (A/B test spec)'
+    validations:
+      required: true
+
+  - type: textarea
+    id: narrative_flags
+    attributes:
+      label: 'Narrative Risk Register (Phase 1 Output)'
+      description: 'After HDD Phase 1 analysis, list the narratives identified. Add these after initial submission.'
+      placeholder: |
+        | Narrative | Load-Bearing | Provenance | Risk |
+        |-----------|--------------|------------|------|
+        | "Users are frustrated by slow onboarding" | Yes | NONE | HIGH |
+        | "Market size is $4.7B" | No | Cited: Gartner 2025 | LOW |
+
+        (Fill in after running HDD Phase 1 — Narrative Challenge)
+    validations:
+      required: false
+
+  - type: textarea
+    id: assumptions
+    attributes:
+      label: 'Extracted Assumptions (Phase 2 Output)'
+      description: 'After HDD Phase 2 analysis, list assumptions. Add these after initial submission.'
+      placeholder: |
+        | Assumption | Source Section | Validated |
+        |------------|---------------|-----------|
+        | Persona "busy executive" exists and is representative | Persona section | No |
+        | Users will pay premium for time savings | Pricing rationale | Partially |
+
+        (Fill in after running HDD Phase 2 — Assumption Extraction)
+    validations:
+      required: false
+
+  - type: textarea
+    id: generated_hypotheses
+    attributes:
+      label: 'Generated Hypotheses (Phase 4 Output)'
+      description: 'After HDD analysis, list the hypotheses extracted and their PRE-XXX IDs once registered'
+      placeholder: |
+        1. We believe [outcome] is achievable if [situation] can get [motivation]. → PRE-001
+        2. We believe [outcome] is achievable if [situation] can get [motivation]. → PRE-002
+
+        (Fill in after running HDD Phase 4 and pre-registering)
+    validations:
+      required: false
+
+  - type: textarea
+    id: abductive_gaps
+    attributes:
+      label: 'Strategic Gaps (Abductive Inquiry)'
+      description: 'What is MISSING from this artifact? What would a complete version include?'
+      placeholder: |
+        - No mention of research data participation strategy
+        - Missing feedback loop from users to product decisions
+        - Competitive grid excludes [obvious competitor]
+
+        (Fill in after running Abductive Inquiry from Absence)
+    validations:
+      required: false
