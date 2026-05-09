@@ -2,7 +2,7 @@
 
 > Stop shipping features. Start learning.
 
-**[View the V&V Evidence Trace →](https://good-citizens-corporation.github.io/hypothesis-driven-design-kit/)**  
+**[View the V&V Evidence Trace →](index.md)**  
 *The kit validates itself using its own methodology. That's the proof-of-concept.*
 
 ---
