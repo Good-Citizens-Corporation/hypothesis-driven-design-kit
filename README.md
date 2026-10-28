@@ -41,7 +41,7 @@ The forms map onto eval work: the prediction is the eval, each observation is an
 ## The rules
 
 - **Predict before you look.** A prediction written after the results is a story. Before, it's a test.
-- **Say what would prove you wrong.** If no result could, it's a belief. "People will like the new design" can't be proven wrong. "Our NPS goes up" sounds like a number, but a Net Promoter Score asks whether people say they'd recommend you, not what they did, and it moves for reasons your design didn't cause. "60% finish the task today, 80% after, and under 65% we were wrong" can be.
+- **Say what would prove you wrong.** If no result could, it's a belief. Take a driverless ride service. "Riders will trust it" can't be proven wrong. "Rider NPS goes up" sounds like a number, but a Net Promoter Score asks whether riders say they'd recommend you, not what anyone did, and it only asks riders: the person crossing in front of the car never gets the survey. "People crossing in front of it wait no longer than they do for a human driver; if they wait longer, we were wrong" can be.
 - **Being wrong counts.** A prediction proved wrong is a finding. Log the surprises; they're worth the most.
 
 None of this is new, on purpose. Programmers write the failing test before the code, scientists pre-register studies, Lean UX writes design as hypotheses, and medical device makers keep a design history file that traces every design input to its verification. What the kit adds is the habit made hard to skip.
@@ -51,6 +51,8 @@ None of this is new, on purpose. Programmers write the failing test before the c
 ## Why this exists
 
 I've spent the 2020s surrounded by robots and glass: kiosks, chatbots and touchscreens that turn every errand into self-service. It's isolating. And most of it reaches us as an open beta. It ships first and finds out later whether it works, and the people using it are the test.
+
+I live in Phoenix, where the beta is the street. Waymo's cars have carried riders with nobody at the wheel since 2020, and took to the freeways in November 2025. DoorDash's delivery robots ride the bike lanes and sidewalks of Tempe and Mesa. Tesla's test cabs are on the roads I drive. The riders signed up. Most of the people they pass didn't.
 
 It doesn't have to be built that way. Write down what you expect before you ship, and what would prove you wrong. Try it on a few people who agreed to be asked, not on everyone. This kit is the smallest proof I could give away: a form, a check and a log, so nobody has to be a test subject who didn't sign up.
 
