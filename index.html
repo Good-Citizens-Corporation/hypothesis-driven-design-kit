@@ -32,6 +32,9 @@ a:hover{color:#7B2FBE}
 .forms,.rules,.start{grid-template-columns:minmax(0,1fr)}
 .hero-h{font-size:48px !important;line-height:52px !important}
 .step-line{display:none}
+.examples{grid-template-columns:minmax(0,1fr) !important}
+.examples>div{border-right:none !important;border-bottom:1px solid #2D0A3A}
+.examples>div:last-child{border-bottom:none}
 }
 </style>
 </head>
@@ -144,16 +147,22 @@ a:hover{color:#7B2FBE}
 <li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 15px">6</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Learn</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">Most of all when you were wrong.</p></li>
 </ol>
 </div>
-<div style="margin-top: 72px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0; border: 1px solid #2D0A3A">
+<div class="examples" style="margin-top: 72px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid #2D0A3A">
 <div style="padding: 24px 28px; border-right: 1px solid #2D0A3A">
 <p class="mono" style="margin: 0; opacity: 0.75">Can’t be proven wrong</p>
 <p style="margin: 8px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px; text-decoration: line-through; text-decoration-thickness: 2px">People will like the new design.</p>
+</div>
+<div style="padding: 24px 28px; border-right: 1px solid #2D0A3A">
+<p class="mono" style="margin: 0; opacity: 0.75">Sounds like a number</p>
+<p style="margin: 8px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px; text-decoration: line-through; text-decoration-thickness: 2px">Our NPS goes up.</p>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 24px">A Net Promoter Score asks whether people say they’d recommend you, not what they did. It moves for reasons your design didn’t cause, so it can’t tell you whether the design worked.</p>
 </div>
 <div style="padding: 24px 28px">
 <p class="mono" style="margin: 0; color: #7B2FBE">Can be</p>
 <p style="margin: 8px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px">More people finish the task: 60% today, 80% after. Under 65% and we were wrong.</p>
 </div>
 </div>
+<p style="margin: 16px 0 0; font-size: 14px; line-height: 20px; opacity: 0.8; max-width: 52em">NPS came out of Fred Reichheld’s 2003 Harvard Business Review article, “The One Number You Need to Grow.” A 2007 study of 21 companies in the Journal of Marketing (Keiningham and others, “A Longitudinal Examination of Net Promoter and Firm Revenue Growth”) couldn’t reproduce that claim. It tracks satisfaction well enough; it just can’t settle a design.</p>
 <div style="margin-top: 40px; max-width: 40em">
 <p class="mono" style="margin: 0">In practice</p>
 <p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">Curious what this looks like on a real project? <a href="https://get-a-bob.com/case-studies/pulse-oximeter-research">A research program for a pulse oximeter app</a> planned the testing before anything was built, for a medical device maker: 80 people living with COPD or pulmonary fibrosis, a screener, and rounds that moved from remote prototype sessions to hour-long sessions with the app and the oximeter. It was proposed and never run, and the case study says so.</p>

@@ -41,7 +41,7 @@ The forms map onto eval work: the prediction is the eval, each observation is an
 ## The rules
 
 - **Predict before you look.** A prediction written after the results is a story. Before, it's a test.
-- **Say what would prove you wrong.** If no result could, it's a belief.
+- **Say what would prove you wrong.** If no result could, it's a belief. "People will like the new design" can't be proven wrong. "Our NPS goes up" sounds like a number, but a Net Promoter Score asks whether people say they'd recommend you, not what they did, and it moves for reasons your design didn't cause. "60% finish the task today, 80% after, and under 65% we were wrong" can be.
 - **Being wrong counts.** A prediction proved wrong is a finding. Log the surprises; they're worth the most.
 
 None of this is new, on purpose. Programmers write the failing test before the code, scientists pre-register studies, Lean UX writes design as hypotheses, and medical device makers keep a design history file that traces every design input to its verification. What the kit adds is the habit made hard to skip.
