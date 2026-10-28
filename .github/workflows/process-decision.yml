@@ -11,6 +11,7 @@ jobs:
     permissions:
       contents: write
       issues: write
+      pull-requests: read
 
     steps:
       - name: Checkout
@@ -31,49 +32,60 @@ jobs:
               return match ? match[1].trim() : '';
             };
 
-            const decision = parseField('Decision').replace(/"/g, '""');
-            const preRef = parseField('Related Hypothesis \\(PRE-XXX\\)');
-            const context_field = parseField('Context').replace(/"/g, '""').replace(/\n/g, ' ');
-            const evidence = parseField('Evidence').replace(/"/g, '""').replace(/\n/g, ' ');
-            const surprised = parseField('Were you surprised\\?');
-            const learning = parseField('What did you learn\\?').replace(/"/g, '""').replace(/\n/g, ' ');
-            const nextSteps = parseField('Next Steps').replace(/"/g, '""').replace(/\n/g, ' ');
-
-            // Determine CSV path
+            const { readLog, writeLog, nextId, closePrediction } = require('./.github/scripts/evidence.js');
             const csvPath = 'evidence-packet/decision_log.csv';
+            const prePath = 'evidence-packet/pre_registrations.csv';
 
             if (!fs.existsSync(csvPath)) {
               core.setFailed(
                 `📁 Can't find ${csvPath}\n\n` +
-                `This usually means the evidence-packet wasn't set up yet.\n\n` +
-                `Quick fix:\n` +
-                `  1. Create the file: evidence-packet/decision_log.csv\n` +
-                `  2. Add the header row (see evidence-packet/README.md)\n` +
-                `  3. Re-open this issue to trigger the workflow\n\n` +
-                `Decision logging helps future-you understand why past-you made this call!`
+                `Quick fix: create it with its header row (see evidence-packet/README.md), then re-open this issue.`
               );
               return;
             }
 
-            // Create new row
+            const log = readLog(fs.readFileSync(csvPath, 'utf8'));
+            const decisionId = nextId(log.rows.map((r) => r.decision_id), 'DEC');
+            const preRef = (parseField('Related Hypothesis \\(PRE-XXX\\)').match(/PRE-\d+/) || [''])[0];
+            const outcome = parseField('How did the prediction end\\?');
             const date = new Date().toISOString().split('T')[0];
-            const newRow = `${date},"${decision}",${preRef},"${context_field}","${evidence}","${surprised}","${learning}","${nextSteps}"`;
+            const oneLine = (v) => v.replace(/\n/g, ' ');
 
-            // Append to CSV
-            fs.appendFileSync(csvPath, '\n' + newRow);
+            log.rows.push({
+              decision_id: decisionId,
+              date,
+              decision: parseField('Decision'),
+              pre_reference: preRef,
+              outcome: outcome === 'No prediction to close' ? '' : outcome,
+              context: oneLine(parseField('Context')),
+              evidence: oneLine(parseField('Evidence')),
+              surprised: parseField('Were you surprised\\?'),
+              learning: oneLine(parseField('What did you learn\\?')),
+              next_steps: oneLine(parseField('Next Steps')),
+            });
+            fs.writeFileSync(csvPath, writeLog(log));
 
-            console.log(`Logged decision to ${csvPath}`);
+            // The decision closes the prediction it names, when it says how it ended.
+            let closed = false;
+            if (preRef && fs.existsSync(prePath)) {
+              const pre = readLog(fs.readFileSync(prePath, 'utf8'));
+              closed = closePrediction(pre, preRef, outcome, new Date().toISOString(), decisionId);
+              if (closed) fs.writeFileSync(prePath, writeLog(pre));
+            }
 
-            // Store for later steps
-            core.exportVariable('CSV_PATH', csvPath);
+            await require('./.github/scripts/trace.js')({ github, context });
+            console.log(`Logged ${decisionId}${closed ? `, closing ${preRef}` : ''}`);
+
+            core.exportVariable('DEC_ID', decisionId);
             core.exportVariable('DATE', date);
+            core.exportVariable('CLOSED', closed ? `${preRef} is now closed: ${outcome.toLowerCase()}.` : '');
 
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "$CSV_PATH"
-          git commit -m "evidence: log decision ($DATE)"
+          git add evidence-packet
+          git commit -m "evidence: $DEC_ID ($DATE)"
           git push
 
       - name: Close issue
@@ -81,15 +93,17 @@ jobs:
         with:
           script: |
             const date = process.env.DATE;
+            const id = process.env.DEC_ID;
+            const closed = process.env.CLOSED;
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
               body: [
-                `## ✅ Decision logged`,
+                `## ${id} logged`,
                 ``,
-                `Your decision is now part of the evidence packet.`,
+                `Your decision is now part of the evidence packet.${closed ? ' ' + closed : ''}`,
                 ``,
                 `**Why this matters:**`,
                 `Six months from now, when someone asks "why did we do it that way?",`,
@@ -98,7 +112,7 @@ jobs:
                 ``,
                 `> 📝 Decisions aren't just outcomes; they're learning artifacts.`,
                 ``,
-                `— Recorded ${date} in \`evidence-packet/decision_log.csv\``
+                `— Recorded ${date} in \`evidence-packet/decision_log.csv\`; the trace is rebuilt in \`evidence-packet/trace_matrix.csv\``
               ].join('\n')
             });
 

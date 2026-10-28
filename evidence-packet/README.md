@@ -18,41 +18,31 @@ Keep a private mapping file (not in this repo) if you need to trace pseudonyms b
 
 ## Files
 
-| File | Purpose | Updated By |
-|------|---------|------------|
-| `intake_log.csv` | Source artifacts — PRDs, decks, briefs before analysis | 🤖 Workflow (from issue form) |
-| `pre_registrations.csv` | Design inputs — locked hypotheses with predictions | 🤖 Workflow (from issue form) |
-| `design_outputs.csv` | Design outputs — what was built to satisfy each input | ✍️ Manual / 🤖 Workflow |
-| `trace_matrix.csv` | Traceability — links Input → Output → Evidence | ✍️ Manual / 🤖 Workflow |
-| `decision_log.csv` | Design decisions and learnings | 🤖 Workflow (from issue form) |
-| `observation_events.csv` | Structured observation data | 🤖 Workflow (from issue form) |
+| File | What it holds | Written by |
+|------|---------------|------------|
+| `pre_registrations.csv` | Predictions, `PRE-###`: what you expect, the number that settles it, what would prove you wrong | The Prediction form's workflow |
+| `observation_events.csv` | Observations, `OBS-###`: what you saw, and the prediction it bears on | The Observation form's workflow |
+| `decision_log.csv` | Decisions, `DEC-###`: what you decided, why, and how the prediction ended | The Decision form's workflow |
+| `trace_matrix.csv` | The trace: each prediction with the merged pull requests, observations and decisions that name it | Rebuilt by every workflow above, and after every merged pull request |
 
-## Traceability (V&V)
+## The trace
 
 ```
-INK-### (Artifact) → PRE-### (Hypothesis) → DO-### (Output) → OBS-### (Evidence)
-                                                   ↓
-                                            trace_matrix.csv
+PRE-### prediction → #pull request → OBS-### observation → DEC-### decision
 ```
 
-The full chain:
-1. **INK-###** — Source artifact arrives (PRD, deck, brief)
-2. **PRE-###** — Hypotheses extracted and pre-registered
-3. **DO-###** — What was built to test each hypothesis
-4. **OBS-###** — Evidence collected during testing
+Nothing is linked by hand: every form and every pull request names the prediction it serves, and `.github/scripts/trace.js` joins them.
 
-## How It Works
+## How it works
 
-1. **Intake an artifact** → Creates `INK-XXX` entry, run HDD analysis
-2. **Pre-register hypotheses** → Creates `PRE-XXX` entries from the analysis
-3. **Do your work** → Create experiments and work items
-4. **Collect evidence** → Log observations as you go
-5. **Make decisions** → Record what you learned, especially surprises
-6. **Close the loop** → Update the PRE-XXX status with outcome
+1. **Predict.** Send a Prediction before the work starts. It gets a `PRE-###` number.
+2. **Build.** Name that number in the pull request. One that names no prediction can't be merged.
+3. **Observe.** Send an Observation for each session, test or data pull.
+4. **Decide.** Send a Decision. Say how the prediction ended, and its status in `pre_registrations.csv` is set for you: validated, falsified, abandoned or inconclusive.
 
 ## Rules
 
-- **Append-only**: Never edit past entries (maintains audit trail)
+- **Append-only**: Never edit past entries. The one change the kit makes itself is a prediction's status, set by the decision that closes it
 - **Timestamp everything**: All entries are timestamped automatically
 - **IDs are sequential**: PRE-001, PRE-002, etc.
 - **Falsification required**: Every hypothesis must define what "wrong" looks like

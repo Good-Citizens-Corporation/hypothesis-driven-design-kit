@@ -1,6 +1,6 @@
-name: '📝 Log Decision'
+name: 'Decision'
 description: 'Record a design decision, especially when surprised by data'
-title: '[DECISION] '
+title: '[DEC] '
 labels: ['decision', 'evidence']
 body:
   - type: markdown
@@ -32,6 +32,20 @@ body:
       placeholder: 'PRE-001'
     validations:
       required: false
+
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: 'How did the prediction end?'
+      description: 'Closes the prediction named above, and sets its status in the log.'
+      options:
+        - 'No prediction to close'
+        - 'It held'
+        - 'It was proved wrong'
+        - 'It was dropped'
+        - 'We couldn’t tell'
+    validations:
+      required: true
 
   - type: textarea
     id: context

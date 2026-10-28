@@ -1,1 +1,4 @@
-trace_id,design_input,design_output,evidence_refs,verification_status,validation_status,notes
+prediction,status,expected,pull_requests,observations,decisions
+PRE-001,validated,"We believe the HDD skill produces actionable hypotheses from messy real-world artifacts if practitioners submit PRDs, decks, and briefs and can get clear next steps (INK → PRE → test plan).",,OBS-001 OBS-002 OBS-003 OBS-004,DEC-001
+PRE-002,registered,We believe distinguishable frustration patterns are achievable if workers with daily AI tool use can get compared meaningfully to workers with minimal AI exposure using self-reported journal entries.,,,
+PRE-003,registered,We believe the skill's output contract can enforce experiment design validity if teams generating hypotheses can get explicit challenge criteria for whether their proposed test method actually isolates the variable under test.,,OBS-005 OBS-006,

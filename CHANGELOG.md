@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-28 — The kit, simplified
+
+**What changed:** The kit is three forms, one check and a trace. Prediction (`PRE-###`), Observation (`OBS-###`) and Decision, which now gets its own number (`DEC-###`) and says how its prediction ended, setting the prediction's status. `trace_matrix.csv` is rebuilt from the links after every form and every merged pull request, instead of kept by hand.
+
+**Removed:** the Intake, Experiment, Work Item and Discovery forms, the intake workflow, the Agile extension, the design outputs log, the Governance, Quick Start, Example and Primer guides, and the Jekyll evidence page. The homepage (`index.html`, served by GitHub Pages) and the README replace them.
+
+**Added:** `.github/scripts/evidence.js`, the logic the workflows share, and its tests, run on every push.
+
+---
+
 ## 2026-03-22 — Template-Encoded Bias + Undifferentiated Commitment (INK-007, INK-008)
 
 **What happened:** Analyzed INK-007 ([ORG-003] TDS Story Map) and INK-008 (WWT Lean UX Book Template — meta-artifact).

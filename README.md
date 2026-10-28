@@ -1,238 +1,64 @@
+![Hypothesis-Driven Design Kit: design history for software teams, pre-registered and traced from prediction to decision](docs/social-card.png)
+
 # Hypothesis-Driven Design Kit
 
-> Stop shipping features. Start learning.
+**Designing for AI starts with an eval.** A model never gives the same answer twice, so you can't draw the right one. What you can write down is what a good answer must do, what fails it, and how often it has to pass, before anyone touches the prompt. If you've ever written down what would prove a design wrong, you already know how.
 
-**[View the V&V Evidence Trace →](index.md)**  
-*The kit validates itself using its own methodology. That's the proof-of-concept.*
+This kit is a GitHub repository template: three issue forms, the GitHub Actions that number and log each one, and a check that won't merge a pull request without a prediction. Your team writes down what it expects before it builds, and the results get compared with what you wrote, not with what you remember.
 
----
+**[Use this template](https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit/generate)** · [The kit on one page](https://good-citizens-corporation.github.io/hypothesis-driven-design-kit/)
 
-## New Here?
+## Start
 
-| You want to... | Start here |
-|----------------|------------|
-| **Understand the concepts** (5 min) | [The Primer](docs/PRIMER.md) |
-| **Get set up and running** (10 min) | [Quick Start](docs/QUICK_START.md) |
-| **See a complete example** (15 min) | [Worked Example](docs/EXAMPLE.md) |
-| **Read the full process** | [How This Works](docs/GOVERNANCE.md) |
-| **Use the Copilot skill** | [Copilot Skill](docs/COPILOT_SKILL.md) |
-| **See the evidence** | [V&V Trace](index.md) |
+1. Use the template to make your own copy of this repository.
+2. Open a new issue, choose **Prediction**, and fill it in: what you expect, the number that settles it, and what would prove you wrong. It's given a number, `PRE-001`.
+3. Name that number in the pull request that builds the test. A pull request that names no prediction can't be merged.
 
-No prior experience with behavioral design or experimentation required.
+The rows already in `evidence-packet/` are the kit's own record. Clear them, keeping each file's header row, once you've copied it.
 
----
+## What's in it
 
-## What Is This?
+| Form | Gets | What it records |
+| --- | --- | --- |
+| Prediction | `PRE-001` | What you believe will happen, the number that will settle it, and the result that would prove you wrong. Sent before any work starts. |
+| Observation | `OBS-001` | What you saw: a session with a customer, a test result, a pull from your analytics. Points to the prediction it bears on. |
+| Decision | `DEC-001` | What you decided and why, and how the prediction ended: it held, it was proved wrong, it was dropped, or we couldn't tell. That closes the prediction in the log. |
 
-A GitHub template that helps you practice **hypothesis-driven design** (HDD). 
+**The check.** `require-preregistration.yml` fails any pull request whose description names no prediction in the log.
 
-Instead of building what you *think* is right, you:
+**The log.** One spreadsheet file per form in `evidence-packet/`: `pre_registrations.csv`, `observation_events.csv`, `decision_log.csv`. Open them in anything.
 
-1. **Predict** what will happen (write it down before you build)
-2. **Define failure** (what would prove you wrong?)
-3. **Build** the smallest thing to test it
-4. **Measure** actual outcomes
-5. **Compare** to your prediction
-6. **Learn** — especially when you're wrong
+**The trace.** Because every form and pull request names the prediction it serves, the numbers join up by themselves: from what you expected, to what you built, to what you saw, to what you decided. `evidence-packet/trace_matrix.csv` is rebuilt after every form and every merged pull request, so nobody keeps it by hand.
 
-## Why?
+Track the work itself wherever you already do: GitHub, Jira or Linear.
 
-Traditional product development rewards shipping. HDD rewards learning.
+## Designing for AI
 
-| Traditional | Hypothesis-Driven |
-|-------------|-------------------|
-| "We shipped the feature" | "We learned X doesn't work" |
-| Success = delivery | Success = insight |
-| Being wrong = failure | Being wrong = data |
-| Gut feelings guide decisions | Evidence guides decisions |
+A design spec used to describe the one right output. A model gives a different answer every time, so the spec has to describe a range: what every good answer does, what no answer may do, and the share that has to pass. That's an eval, and product teams have started treating it as the spec itself ([Mind the Product, July 2026](https://www.mindtheproduct.com/evals-are-the-new-prd/)).
 
-**The uncomfortable truth:** If you're not surprised by your data, you're not experimenting — you're confirming what you already believe.
+The forms map onto eval work: the prediction is the eval, each observation is an eval run, and the decision is the call to ship, change the prompt or change the model. The kit records evals; it doesn't run them. Asking the model the questions and scoring the answers takes a test harness, which you bring.
 
----
+## The rules
 
-## Quick Start (The Short Version)
+- **Predict before you look.** A prediction written after the results is a story. Before, it's a test.
+- **Say what would prove you wrong.** If no result could, it's a belief.
+- **Being wrong counts.** A prediction proved wrong is a finding. Log the surprises; they're worth the most.
 
-### 1. Use This Template
+None of this is new, on purpose. Programmers write the failing test before the code, scientists pre-register studies, Lean UX writes design as hypotheses, and medical device makers keep a design history file that traces every design input to its verification. What the kit adds is the habit made hard to skip.
 
-Click **"Use this template"** → Create your own repository.
+**Borrowed from FDA design controls, it is not a compliance tool:** it has no signed approvals or change control, and its records are files anyone with access to the repository can edit.
 
-### 2. Pre-register Your First Hypothesis
+## Why this exists
 
-Go to **Issues → New Issue → 🔬 Pre-register Hypothesis**
+I've spent the 2020s surrounded by robots and glass: kiosks, chatbots and touchscreens that turn every errand into self-service. It's isolating. And most of it reaches us as an open beta. It ships first and finds out later whether it works, and the people using it are the test.
 
-Fill out:
-- What you believe will happen
-- How you'll measure it
-- What result would prove you wrong
+It doesn't have to be built that way. Write down what you expect before you ship, and what would prove you wrong. Try it on a few people who agreed to be asked, not on everyone. This kit is the smallest proof I could give away: a form, a check and a log, so nobody has to be a test subject who didn't sign up.
 
-The workflow assigns a `PRE-001` ID and logs it to CSV.
+— [Robert Duebelbeis](https://get-a-bob.com/experience), [Good Citizens](https://goodcitizens.us)
 
-### 3. Create an Experiment
+## Also here
 
-Go to **Issues → New Issue → 🧪 Experiment**
+- `hypothesis-driven-design.skill` and `skill-update/`: an agent skill that turns briefs, PRDs and decks into predictions in this format. How to use it: [docs/COPILOT_SKILL.md](docs/COPILOT_SKILL.md).
+- `.github/scripts/`: the logic the workflows share, with its tests (`node --test .github/scripts/evidence.test.js`).
 
-Reference your `PRE-001` and define:
-- What you'll build/change
-- Success criteria
-- Measurement plan
-
-### 4. Do the Work
-
-Create **📦 Work Items** as needed to implement the experiment.
-
-### 5. Collect Evidence
-
-As you learn, log:
-- **👁️ Observations** — user sessions, test results, data pulls
-- **📝 Decisions** — what you decided and why (especially surprises)
-
-### 6. Close the Loop
-
-Update your pre-registration with the outcome:
-- Validated ✅
-- Falsified ❌ (this is valuable!)
-- Abandoned 🚫
-- Inconclusive ❓
-
----
-
-## What's Included
-
-### Issue Templates
-
-| Template | Purpose |
-|----------|---------|
-| 🔬 Pre-register Hypothesis | Lock your prediction before building |
-| 📝 Log Decision | Record decisions, especially surprises |
-| 👁️ Record Observation | Log evidence from sessions/tests |
-| 🧪 Experiment | A testable hypothesis with outcomes |
-| 📦 Work Item | A deliverable that contributes to an experiment |
-| 🔍 Discovery | Research to establish baseline or explore |
-
-### Workflows
-
-| Workflow | What It Does |
-|----------|--------------|
-| `process-preregistration.yml` | Assigns PRE-XXX ID, appends to CSV |
-| `process-decision.yml` | Appends decision to CSV |
-| `process-observation.yml` | Assigns OBS-XXX ID, appends to CSV |
-| `require-preregistration.yml` | Blocks PRs without hypothesis reference |
-
-### Evidence Packet
-
-| File | Purpose |
-|------|---------|
-| `pre_registrations.csv` | Your locked hypotheses |
-| `decision_log.csv` | Your design decisions |
-| `observation_events.csv` | Your collected evidence |
-
----
-
-## The Rules
-
-### Pre-registration Is Not Optional
-
-If you're testing a hypothesis, you must pre-register it **before** you see results. This prevents:
-- Cherry-picking metrics that happened to improve
-- Post-hoc rationalization ("we always knew that")
-- Confirmation bias
-
-### Falsification Is Required
-
-Every hypothesis must define what would prove it wrong. If nothing can falsify your hypothesis, it's not testable — it's a belief.
-
-**Bad:** "Users will like the new design"  
-**Good:** "Task completion rate will increase from 60% to 80%"
-
-### Being Wrong Is Valuable
-
-A falsified hypothesis is not a failure. It's data. You now know something you didn't know before.
-
-**Log your surprises.** They're the most valuable part.
-
----
-
-## Adapting This Kit
-
-### Different Terminology?
-
-The templates use neutral terms (Experiment, Work Item, Discovery). If your team prefers:
-
-| This Kit | Scrum | Kanban | Research |
-|----------|-------|--------|----------|
-| Experiment | Epic | Initiative | Study |
-| Work Item | Story/Task | Card | Task |
-| Discovery | Spike | Research | Baseline |
-
-Fork and rename.
-
-### Need Agile Integration?
-
-See `extensions/agile/` for EPIC/SLICE/SPIKE templates with INVEST criteria and velocity tracking.
-
-### Different Tools?
-
-The workflows use GitHub Actions and CSVs. Adapt as needed:
-- CSV → Airtable/Notion database
-- GitHub Issues → Jira/Linear
-- GitHub Actions → Zapier/n8n
-
-The *methodology* is what matters, not the tooling.
-
----
-
-## Share Your Results
-
-We're collecting community outcomes to validate whether HDD actually works.
-
-**[Submit your results →](https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit/issues/new/choose)**
-
-What we want to know:
-- Did you discover something surprising?
-- Would you recommend this process?
-- What would you change?
-
----
-
-## Resources
-
-- [Quick Start Guide](docs/QUICK_START.md)
-- [Governance & Process](docs/GOVERNANCE.md)
-- [Agile Extension](extensions/agile/README.md)
-
----
-
-## Acknowledgements
-
-This kit stands on the shoulders of people who figured out how to learn honestly.
-
-### Methodology
-
-| Concept | We got it from |
-|---------|---------------|
-| **Pre-registration** | Clinical trials methodology — committing to hypotheses before seeing data to prevent post-hoc rationalization |
-| **Falsification** | Karl Popper — a hypothesis must be capable of being proven wrong to be meaningful |
-| **V&V / Design History File** | NASA and FDA design controls — rigorous traceability from requirements to evidence |
-| **INVEST criteria** | Bill Wake — the checklist that makes user stories actually testable |
-| **Validated learning / MVP** | Eric Ries — learning is the unit of progress, not features |
-| **Jobs to be Done** | Clayton Christensen & Bob Moesta — framing needs as situations, not personas |
-| **Cognitive bias framing** | Daniel Kahneman & Amos Tversky — understanding why we fool ourselves |
-| **Vertical slices** | Kent Beck / Extreme Programming — shipping thin, complete increments |
-| **Concierge / Wizard of Oz** | Lean UX (Jeff Gothelf, Josh Seiden) — testing value before building systems |
-| **Registered reports** | Center for Open Science — fixing science by committing before measuring |
-
-### Community
-
-The folks at [Open Science Framework](https://osf.io/) who proved pre-registration works at scale.
-
-Everyone who's ever said "but how do we know it actually worked?" and meant it.
-
----
-
-## License
-
-MIT — Use it, fork it, adapt it.
-
----
-
-*If you already know what you'll learn, you're not experimenting. You're documenting.*
+Not on GitHub? The method doesn't need it. A spreadsheet with three tabs, one per form, does the same job.

@@ -11,6 +11,7 @@ jobs:
     permissions:
       contents: write
       issues: write
+      pull-requests: read
 
     steps:
       - name: Checkout
@@ -32,7 +33,7 @@ jobs:
             };
 
             const preRef = parseField('Related Hypothesis \\(PRE-XXX\\)');
-            const expRef = parseField('Related Experiment');
+            const expRef = parseField('Related pull request or issue');
             const obsType = parseField('Observation Type');
             const participants = parseField('Participants / Sample Size');
             const findings = parseField('Key Findings').replace(/"/g, '""').replace(/\n/g, ' ');
@@ -79,11 +80,17 @@ jobs:
             core.exportVariable('SESSION_ID', sessionId);
             core.exportVariable('CSV_PATH', csvPath);
 
+      - name: Rebuild the trace
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await require('./.github/scripts/trace.js')({ github, context });
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "$CSV_PATH"
+          git add evidence-packet
           git commit -m "evidence: record observation $SESSION_ID"
           git push
 

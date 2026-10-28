@@ -1,4 +1,4 @@
-name: '👁️ Record Observation'
+name: 'Observation'
 description: 'Log an observation session or data collection event'
 title: '[OBS] '
 labels: ['observation', 'evidence']
@@ -27,9 +27,9 @@ body:
   - type: input
     id: experiment_reference
     attributes:
-      label: 'Related Experiment'
-      description: 'Which experiment is this part of?'
-      placeholder: '#42 or EXP-001'
+      label: 'Related pull request or issue'
+      description: 'The work this observation tested, if any'
+      placeholder: '#42'
     validations:
       required: false
 
