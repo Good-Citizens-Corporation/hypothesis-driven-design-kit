@@ -13,39 +13,263 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&amp;family=Atkinson+Hyperlegible+Mono:wght@500;600&amp;family=Atkinson+Hyperlegible+Next:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&amp;family=Atkinson+Hyperlegible+Mono:wght@500;600&amp;family=Atkinson+Hyperlegible+Next:wght@200..800&amp;display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#F5F0EC}
 a{color:#2D0A3A;text-decoration-thickness:1px;text-underline-offset:4px}
 a:hover{color:#7B2FBE}
-.wrap{max-width:1200px;margin:0 auto;padding:0 48px}
-.mono{font-family:"Atkinson Hyperlegible Mono",ui-monospace,monospace;font-weight:500;text-transform:uppercase;letter-spacing:0.16em;font-size:13px;line-height:20px}
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:48px;align-items:start}
+.wrap{max-width:1200px;margin:0 auto;padding:0 52px}
+.mono{font-family:"Atkinson Hyperlegible Mono",ui-monospace,monospace;font-weight:500;text-transform:uppercase;letter-spacing:0.16em;font-size:12.5px;line-height:20px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:52px;align-items:start}
 .steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0}
 .forms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
 .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
 .start{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
 @media (max-width:900px){
 .wrap{padding:0 20px}
-.split{grid-template-columns:minmax(0,1fr);gap:24px}
-.steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}
+.split{grid-template-columns:minmax(0,1fr);gap:20px}
+.steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
 .forms,.rules,.start{grid-template-columns:minmax(0,1fr)}
-.hero-h{font-size:48px !important;line-height:52px !important}
+.hero-h{font-size:52px !important;line-height:56px !important}
 .step-line{display:none}
 .examples{grid-template-columns:minmax(0,1fr) !important}
 .examples>div{border-right:none !important;border-bottom:1px solid #2D0A3A}
 .examples>div:last-child{border-bottom:none}
 }
+h1,h2,h3,[style*="Archivo"]{letter-spacing:normal;word-spacing:normal}
+.mono{word-spacing:normal}
+.signoff{display:inline-flex;align-items:center;gap:8px;font-family:Archivo,sans-serif;font-weight:900;font-size:32px;line-height:36px;letter-spacing:-0.035em;word-spacing:normal;text-transform:uppercase;text-decoration:none;color:#2D0A3A}
+.signoff:hover{color:#2D0A3A}
 </style>
 </head>
 <body>
-<div style="background: #F5F0EC; color: #2D0A3A; font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; font-size: 20px; line-height: 32px; min-height: 100vh">
+<div style="background: #F5F0EC; color: #2D0A3A; font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; font-weight: 350; letter-spacing: 0.05em; word-spacing: 0.02em; font-size: 20px; line-height: 32px; min-height: 100vh">
 
 <div style="height: 6px; background: #2D0A3A"></div>
 
-<header class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; padding-bottom: 24px">
-<a href="https://goodcitizens.us" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
-<svg viewBox="-8 -8 176 176" width="36" height="36" aria-hidden="true">
+<header class="wrap" style="display: flex; justify-content: flex-end; padding-top: 20px; padding-bottom: 20px">
+<a class="mono" href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit" style="white-space: nowrap">On GitHub</a>
+</header>
+
+<section class="wrap" style="padding-top: 52px; padding-bottom: 84px" aria-labelledby="hero-h">
+<p class="mono" style="margin: 0; color: #7B2FBE">For designers starting on AI · design history for software teams</p>
+<h1 id="hero-h" class="hero-h" style="margin: 20px 0 0; font-family: Archivo, sans-serif; font-weight: 900; font-size: 84px; line-height: 80px; letter-spacing: -0.03em; max-width: 15ch">Designing for AI starts with an eval.</h1>
+<p style="margin: 32px 0 0; max-width: 34em">A model never gives the same answer twice, so you can’t draw the right one. What you can write down is what a good answer must do, what fails it, and how often it has to pass, before anyone touches the prompt. That’s an eval. If you’ve ever written down what would prove a design wrong, you already know how.</p>
+<p style="margin: 20px 0 0; max-width: 40em">This kit is a GitHub repository template: three issue forms, the GitHub Actions that number and log each one, and a check that won’t merge a pull request without a prediction. Your team writes down what it expects before it builds, and the results get compared with what you wrote, not with what you remember.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px">
+<a href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit/generate" style="display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 20px; background: #2D0A3A; color: #F5F0EC; text-decoration: none; font-weight: 700"><span style="width: 12px; height: 12px; background: #FF2600" aria-hidden="true"></span>Use this template</a>
+<a href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 20px; border: 1px solid #2D0A3A; text-decoration: none; font-weight: 700">See the repository</a>
+</div>
+</section>
+
+<section id="ai" style="border-top: 2px solid #2D0A3A" aria-labelledby="ai-h">
+<div class="wrap" style="padding-top: 52px; padding-bottom: 84px">
+<div class="split">
+<div>
+<p class="mono" style="margin: 0; color: #7B2FBE">01 · Designing for AI</p>
+<h2 id="ai-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 42px; line-height: 48px; letter-spacing: -0.015em">The spec is a sentence with a threshold</h2>
+</div>
+<div>
+<p style="margin: 0; max-width: 34em">A design spec used to describe the one right output: this screen, this button, this line of copy. A model gives a different answer every time, so the spec has to describe a range instead: what every good answer does, what no answer may do, and the share that has to pass. Machine-learning teams call that an eval, and product teams have started treating it as the spec itself. Mind the Product put it plainly: “A document describes intent. A dataset is specification.”</p>
+<p style="margin: 20px 0 0; max-width: 34em">Deciding what a good answer sounds like, what it must never say, and when it should hand someone to a person is design work. This kit gives those decisions a place to be written down before the build, and a record of whether they held.</p>
+</div>
+</div>
+<div style="margin-top: 52px; border: 1px solid #2D0A3A">
+<div style="padding: 20px 32px; border-bottom: 1px solid #2D0A3A; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px">
+<p class="mono" style="margin: 0; color: #7B2FBE">PRE-007 · An example prediction for a support chatbot</p>
+<p class="mono" style="margin: 0; opacity: 0.75">Written before the prompt</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))">
+<div style="padding: 20px 32px; border-right: 1px solid #2D0A3A">
+<p class="mono" style="margin: 0">Every good answer</p>
+<p style="margin: 8px 0 0; font-size: 20px; line-height: 32px">Quotes the price from the current price list, and says what’s included.</p>
+</div>
+<div style="padding: 20px 32px; border-right: 1px solid #2D0A3A">
+<p class="mono" style="margin: 0">No answer may</p>
+<p style="margin: 8px 0 0; font-size: 20px; line-height: 32px">Invent a price, promise a delivery date, or settle a refund. Refunds go to a person.</p>
+</div>
+<div style="padding: 20px 32px">
+<p class="mono" style="margin: 0">It passes if</p>
+<p style="margin: 8px 0 0; font-size: 20px; line-height: 32px">18 of 20 test questions are answered well, and none breaks a rule. One invented price fails it outright.</p>
+</div>
+</div>
+</div>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px">
+<div>
+<p class="mono" style="margin: 0">How the forms map</p>
+<p style="margin: 8px 0 0; font-size: 20px; line-height: 32px">The prediction is the eval. Each observation is an eval run: what the model actually said to the test questions. The decision is the call: ship it, change the prompt, or change the model, with the reason.</p>
+</div>
+<div>
+<p class="mono" style="margin: 0">Running on a real chatbot</p>
+<p style="margin: 8px 0 0; font-size: 20px; line-height: 32px">Ask Bob, the chatbot on <a href="https://get-a-bob.com">get-a-bob.com</a>, is graded this way on twenty questions: the facts a good answer must carry, the claims it must never make, and the ones it hands back to a person.</p>
+</div>
+<div>
+<p class="mono" style="margin: 0">What it doesn’t do</p>
+<p style="margin: 8px 0 0; font-size: 20px; line-height: 32px">The kit records evals; it doesn’t run them. Asking the model the questions and scoring the answers takes a test harness, which you bring.</p>
+</div>
+</div>
+<p style="margin: 32px 0 0; font-size: 12.5px; line-height: 20px; opacity: 0.8">Source: Lisa Murkin, <a href="https://www.mindtheproduct.com/evals-are-the-new-prd/">“Evals are the new PRD”</a>, Mind the Product, July 16, 2026.</p>
+</div>
+</section>
+
+<section id="loop" style="border-top: 2px solid #2D0A3A" aria-labelledby="loop-h">
+<div class="wrap" style="padding-top: 52px; padding-bottom: 84px">
+<div class="split">
+<div>
+<p class="mono" style="margin: 0; color: #7B2FBE">02 · The loop</p>
+<h2 id="loop-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 42px; line-height: 48px; letter-spacing: -0.015em">Six steps, and the first two happen on paper</h2>
+</div>
+<p style="margin: 0; max-width: 34em">Every change starts as a guess. Writing the guess down first, with the result that would prove it wrong, is what keeps a team from quietly changing what success meant once the numbers arrive.</p>
+</div>
+<div style="position: relative; margin-top: 84px">
+<div style="display: flex; align-items: flex-end; gap: 8px; width: calc(100% / 3); min-width: 220px">
+<span class="mono" style="color: #7B2FBE; white-space: nowrap">Written down before you build</span>
+</div>
+<div style="width: calc(100% / 3 - 24px); min-width: 220px; height: 12px; margin-top: 8px; border: 1.5px solid #7B2FBE; border-bottom: none" aria-hidden="true"></div>
+<div class="step-line" style="position: absolute; left: 18px; right: calc(100% / 6 - 18px); top: 88px; height: 1.5px; background: #2D0A3A" aria-hidden="true"></div>
+<ol class="steps" style="list-style: none; margin: 20px 0 0; padding: 0; position: relative">
+<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 16px">1</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Predict</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">What you expect to happen, as a number.</p></li>
+<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 16px">2</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Define failure</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">The result that would prove you wrong.</p></li>
+<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 16px">3</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Build the smallest test</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">Only as much as it takes to find out.</p></li>
+<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 16px">4</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Measure</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">What actually happened, from real use.</p></li>
+<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 16px">5</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Compare</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">The result against what you wrote in step 1.</p></li>
+<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 16px">6</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Learn</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">Most of all when you were wrong.</p></li>
+</ol>
+</div>
+<p class="mono" style="margin: 84px 0 0; color: #7B2FBE">Example · a driverless ride service</p>
+<div class="examples" style="margin-top: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid #2D0A3A">
+<div style="padding: 20px 32px; border-right: 1px solid #2D0A3A">
+<p class="mono" style="margin: 0; opacity: 0.75">Can’t be proven wrong</p>
+<p style="margin: 8px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 26px; line-height: 32px; text-decoration: line-through; text-decoration-thickness: 2px">Riders will trust it.</p>
+</div>
+<div style="padding: 20px 32px; border-right: 1px solid #2D0A3A">
+<p class="mono" style="margin: 0; opacity: 0.75">Sounds like a number</p>
+<p style="margin: 8px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 26px; line-height: 32px; text-decoration: line-through; text-decoration-thickness: 2px">Rider NPS goes up.</p>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 24px">A Net Promoter Score asks whether riders say they’d recommend you, not what anyone did. And it only asks riders. The person crossing in front of the car never gets the survey.</p>
+</div>
+<div style="padding: 20px 32px">
+<p class="mono" style="margin: 0; color: #7B2FBE">Can be</p>
+<p style="margin: 8px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 26px; line-height: 32px">People crossing in front of it wait no longer than they do for a human driver. If they wait longer, we were wrong.</p>
+</div>
+</div>
+<p style="margin: 16px 0 0; font-size: 12.5px; line-height: 20px; opacity: 0.8; max-width: 52em">NPS came out of Fred Reichheld’s 2003 Harvard Business Review article, “The One Number You Need to Grow.” A 2007 study of 21 companies in the Journal of Marketing (Keiningham and others, “A Longitudinal Examination of Net Promoter and Firm Revenue Growth”) couldn’t reproduce that claim. It tracks satisfaction well enough; it just can’t settle a design.</p>
+<div style="margin-top: 32px; max-width: 40em">
+<p class="mono" style="margin: 0">In practice</p>
+<p style="margin: 8px 0 0; font-size: 20px; line-height: 32px">Curious what this looks like on a real project? <a href="https://get-a-bob.com/case-studies/pulse-oximeter-research">A research program for a pulse oximeter app</a> planned the testing before anything was built, for a medical device maker: 80 people living with COPD or pulmonary fibrosis, a screener, and rounds that moved from remote prototype sessions to hour-long sessions with the app and the oximeter. It was proposed and never run, and the case study says so.</p>
+</div>
+</div>
+</section>
+
+<section id="kit" style="border-top: 2px solid #2D0A3A" aria-labelledby="kit-h">
+<div class="wrap" style="padding-top: 52px; padding-bottom: 84px">
+<div class="split">
+<div>
+<p class="mono" style="margin: 0; color: #7B2FBE">03 · What’s in it</p>
+<h2 id="kit-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 42px; line-height: 48px; letter-spacing: -0.015em">Three forms, one check, and a trace you own</h2>
+</div>
+<p style="margin: 0; max-width: 34em">Each form is a GitHub issue. When you send one, a GitHub Action gives it a number and adds a row to a spreadsheet file in your repository, so the record lives with your code. Track the work itself wherever you already do: GitHub, Jira or Linear.</p>
+</div>
+<ol class="forms" style="list-style: none; margin: 52px 0 0; padding: 0; border-top: 1px solid #2D0A3A; border-left: 1px solid #2D0A3A">
+<li style="padding: 32px; border-right: 1px solid #2D0A3A; border-bottom: 1px solid #2D0A3A">
+<p class="mono" style="margin: 0; color: #7B2FBE">Form 1 · PRE-001</p>
+<h3 style="margin: 12px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 26px; line-height: 32px">A prediction</h3>
+<p style="margin: 12px 0 0; font-size: 20px; line-height: 32px">What you believe will happen, the number that will settle it, and the result that would prove you wrong. Sent before any work starts.</p>
+</li>
+<li style="padding: 32px; border-right: 1px solid #2D0A3A; border-bottom: 1px solid #2D0A3A">
+<p class="mono" style="margin: 0; color: #7B2FBE">Form 2 · OBS-001</p>
+<h3 style="margin: 12px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 26px; line-height: 32px">An observation</h3>
+<p style="margin: 12px 0 0; font-size: 20px; line-height: 32px">What you saw: a session with a customer, a test result, a pull from your analytics. Each one points to the prediction it bears on.</p>
+</li>
+<li style="padding: 32px; border-right: 1px solid #2D0A3A; border-bottom: 1px solid #2D0A3A">
+<p class="mono" style="margin: 0; color: #7B2FBE">Form 3 · DEC-001</p>
+<h3 style="margin: 12px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 26px; line-height: 32px">A decision</h3>
+<p style="margin: 12px 0 0; font-size: 20px; line-height: 32px">What you decided and why, and how the prediction ended: it held, it was proved wrong, it was dropped, or we couldn’t tell. That closes the prediction in the log.</p>
+</li>
+</ol>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px">
+<div>
+<p class="mono" style="margin: 0">The check</p>
+<p style="margin: 8px 0 0; font-size: 20px; line-height: 32px">A pull request that doesn’t name a prediction can’t be merged. Nothing ships that wasn’t predicted first.</p>
+</div>
+<div>
+<p class="mono" style="margin: 0">The log</p>
+<p style="margin: 8px 0 0; font-size: 20px; line-height: 32px">Three spreadsheet files, one per form, in your repository: predictions, observations, decisions. Open them in anything.</p>
+</div>
+</div>
+<div style="margin-top: 52px; border: 1px solid #2D0A3A; padding: 32px">
+<p class="mono" style="margin: 0; color: #7B2FBE">The trace</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 16px; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 16px; line-height: 24px">
+<span style="padding: 6px 12px; background: #2D0A3A; color: #F5F0EC">PRE-001 prediction</span><span aria-hidden="true">→</span>
+<span style="padding: 6px 12px; border: 1px solid #2D0A3A">#42 pull request</span><span aria-hidden="true">→</span>
+<span style="padding: 6px 12px; border: 1px solid #2D0A3A">OBS-003 observation</span><span aria-hidden="true">→</span>
+<span style="padding: 6px 12px; border: 1px solid #2D0A3A">DEC-002 decision: it held</span>
+</div>
+<p style="margin: 16px 0 0; font-size: 20px; line-height: 32px; max-width: 40em">Because every form and pull request names the prediction it serves, the numbers join up by themselves: from what you expected, to what you built, to what you saw, to what you decided. The kit draws that as one table, the trace matrix, so nobody keeps it by hand.</p>
+</div>
+</div>
+</section>
+
+<section style="border-top: 2px solid #2D0A3A" aria-labelledby="rules-h">
+<div class="wrap" style="padding-top: 52px; padding-bottom: 84px">
+<p class="mono" style="margin: 0; color: #7B2FBE">04 · The rules</p>
+<h2 id="rules-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 42px; line-height: 48px; letter-spacing: -0.015em">Three, and they don’t bend</h2>
+<div class="rules" style="margin-top: 52px">
+<div style="border-top: 1px solid #2D0A3A; padding-top: 20px">
+<h3 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 26px; line-height: 32px">Predict before you look</h3>
+<p style="margin: 12px 0 0; font-size: 20px; line-height: 32px">A prediction written after the results is a story. Before, it’s a test.</p>
+</div>
+<div style="border-top: 1px solid #2D0A3A; padding-top: 20px">
+<h3 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 26px; line-height: 32px">Say what would prove you wrong</h3>
+<p style="margin: 12px 0 0; font-size: 20px; line-height: 32px">If no result could, it’s a belief, and the form won’t take it.</p>
+</div>
+<div style="border-top: 1px solid #2D0A3A; padding-top: 20px">
+<h3 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 26px; line-height: 32px">Being wrong counts</h3>
+<p style="margin: 12px 0 0; font-size: 20px; line-height: 32px">A prediction proved wrong is a finding. Log the surprises; they’re worth the most.</p>
+</div>
+</div>
+<p style="margin: 52px 0 0; max-width: 40em; font-size: 20px; line-height: 32px; opacity: 0.85">None of this is new, on purpose. Programmers write the failing test before the code, scientists pre-register studies, Lean UX writes design as hypotheses, and medical device makers keep a design history file (in FDA’s current rule, the design and development file) that traces every design input to its verification. What the kit adds is the habit made hard to skip: a form for each step, and a merge that waits for the prediction.</p>
+<p style="margin: 16px 0 0; max-width: 40em; font-size: 20px; line-height: 32px; font-weight: 700">Borrowed from FDA design controls, it is not a compliance tool: it has no signed approvals or change control, and its records are files anyone with access to the repository can edit.</p>
+</div>
+</section>
+
+<section style="border-top: 2px solid #2D0A3A" aria-labelledby="why-h">
+<div class="wrap" style="padding-top: 52px; padding-bottom: 84px">
+<div class="split">
+<div>
+<p class="mono" style="margin: 0; color: #7B2FBE">05 · Why this exists</p>
+<h2 id="why-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 42px; line-height: 48px; letter-spacing: -0.015em">You don’t have to make the world your test group</h2>
+</div>
+<div style="max-width: 34em">
+<p style="margin: 0">I’ve spent the 2020s surrounded by robots and glass: kiosks, chatbots and touchscreens that turn every errand into self-service. It’s isolating. And most of it reaches us as an open beta. It ships first and finds out later whether it works, and the people using it are the test.</p>
+<p style="margin: 20px 0 0">I live in Phoenix, where the beta is the street. Waymo’s cars have carried riders with nobody at the wheel since 2020, and took to the freeways in November 2025. DoorDash’s delivery robots ride the bike lanes and sidewalks of Tempe and Mesa. Tesla’s test cabs are on the roads I drive. The riders signed up. Most of the people they pass didn’t.</p>
+<p style="margin: 20px 0 0">It doesn’t have to be built that way. Write down what you expect before you ship, and what would prove you wrong. Try it on a few people who agreed to be asked, not on everyone. This kit is the smallest proof I could give away: a form, a check and a log, so nobody has to be a test subject who didn’t sign up.</p>
+<p class="mono" style="margin: 20px 0 0">Robert Duebelbeis · Good Citizens</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="start" style="border-top: 2px solid #2D0A3A; background: #2D0A3A; color: #F5F0EC" aria-labelledby="start-h">
+<div class="wrap" style="padding-top: 52px; padding-bottom: 84px">
+<p class="mono" style="margin: 0; color: #C9A2F0">06 · Start</p>
+<h2 id="start-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 42px; line-height: 48px; letter-spacing: -0.015em">Your first prediction, in ten minutes</h2>
+<ol class="start" style="list-style: none; margin: 52px 0 0; padding: 0">
+<li style="border-top: 1px solid #F5F0EC; padding-top: 20px"><p class="mono" style="margin: 0; color: #C9A2F0">1</p><p style="margin: 8px 0 0">Use the template to make your own copy of the repository.</p></li>
+<li style="border-top: 1px solid #F5F0EC; padding-top: 20px"><p class="mono" style="margin: 0; color: #C9A2F0">2</p><p style="margin: 8px 0 0">Open a new issue, choose Prediction, and fill it in: what you expect, the number that settles it, and what would prove you wrong.</p></li>
+<li style="border-top: 1px solid #F5F0EC; padding-top: 20px"><p class="mono" style="margin: 0; color: #C9A2F0">3</p><p style="margin: 8px 0 0">Name its number, PRE-001, in the pull request that builds the test.</p></li>
+</ol>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 52px">
+<a href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit/generate" style="display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 20px; background: #F5F0EC; color: #2D0A3A; text-decoration: none; font-weight: 700"><span style="width: 12px; height: 12px; background: #FF2600" aria-hidden="true"></span>Use this template</a>
+<a href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 20px; border: 1px solid #F5F0EC; color: #F5F0EC; text-decoration: none; font-weight: 700">See the repository</a>
+</div>
+<p style="margin: 32px 0 0; font-size: 20px; line-height: 32px; max-width: 40em; opacity: 0.85">Not on GitHub? The method doesn’t need it. A spreadsheet with three tabs, one per form, does the same job.</p>
+</div>
+</section>
+
+<footer class="wrap" style="padding-top: 52px; padding-bottom: 52px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px">
+<p style="margin: 0; font-size: 16px; line-height: 24px; max-width: 36em">From the practice of <a href="https://get-a-bob.com/experience">Robert Duebelbeis</a>, who ran design this way on enterprise product teams for five years. Free from <a href="https://goodcitizens.us">Good Citizens</a>.</p>
+<a class="signoff" href="https://goodcitizens.us" aria-label="Make Good Work: Good Citizens, home"><span aria-hidden="true">Make</span>
+<svg viewBox="-8 -8 176 176" width="36" height="36" style="display: block" aria-hidden="true">
 <path d="M156.00 80.41 A76 76 0 1 1 105.99 8.58 L97.79 31.14 A52 52 0 1 0 131.92 82.82 A71.00 71.00 0 0 0 156.00 80.41 Z" fill="#2D0A3A"></path>
 <path d="M109.94 103.4 A38 38 0 1 1 109.94 56.6 L93.4 69.53 A17 17 0 1 0 93.4 90.47 Z" fill="#2D0A3A"></path>
 <path d="M50.34 101.73 L38.29 115.11 L49.44 125.15 L61.48 111.77 Z" fill="#2D0A3A"></path>
@@ -57,229 +281,7 @@ a:hover{color:#7B2FBE}
 <rect x="122.4" y="32.6" width="16" height="16" fill="#FFD600"></rect>
 <rect x="123" y="32" width="16" height="16" fill="#FF2D87" style="mix-blend-mode: multiply"></rect>
 </svg>
-<span class="mono" style="font-size: 14px; letter-spacing: 0.24em; white-space: nowrap">Good Citizens</span>
-</a>
-<a class="mono" href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit" style="white-space: nowrap">On GitHub</a>
-</header>
-
-<section class="wrap" style="padding-top: 96px; padding-bottom: 96px" aria-labelledby="hero-h">
-<p class="mono" style="margin: 0; color: #007068">For designers starting on AI · design history for software teams</p>
-<h1 id="hero-h" class="hero-h" style="margin: 24px 0 0; font-family: Archivo, sans-serif; font-weight: 900; font-size: 84px; line-height: 84px; letter-spacing: -0.03em; max-width: 15ch">Designing for AI starts with an eval.</h1>
-<p style="margin: 40px 0 0; font-size: 25px; line-height: 40px; max-width: 34em">A model never gives the same answer twice, so you can’t draw the right one. What you can write down is what a good answer must do, what fails it, and how often it has to pass, before anyone touches the prompt. That’s an eval. If you’ve ever written down what would prove a design wrong, you already know how.</p>
-<p style="margin: 24px 0 0; font-size: 20px; line-height: 32px; max-width: 40em">This kit is a GitHub repository template: three issue forms, the GitHub Actions that number and log each one, and a check that won’t merge a pull request without a prediction. Your team writes down what it expects before it builds, and the results get compared with what you wrote, not with what you remember.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 40px">
-<a href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit/generate" style="display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 24px; background: #2D0A3A; color: #F5F0EC; text-decoration: none; font-weight: 700"><span style="width: 12px; height: 12px; background: #FF2600" aria-hidden="true"></span>Use this template</a>
-<a href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border: 1px solid #2D0A3A; text-decoration: none; font-weight: 700">See the repository</a>
-</div>
-</section>
-
-<section id="ai" style="border-top: 2px solid #2D0A3A" aria-labelledby="ai-h">
-<div class="wrap" style="padding-top: 64px; padding-bottom: 96px">
-<div class="split">
-<div>
-<p class="mono" style="margin: 0; color: #7B2FBE">01 · Designing for AI</p>
-<h2 id="ai-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 41px; line-height: 48px; letter-spacing: -0.015em">The spec is a sentence with a threshold</h2>
-</div>
-<div>
-<p style="margin: 0; max-width: 34em">A design spec used to describe the one right output: this screen, this button, this line of copy. A model gives a different answer every time, so the spec has to describe a range instead: what every good answer does, what no answer may do, and the share that has to pass. Machine-learning teams call that an eval, and product teams have started treating it as the spec itself. Mind the Product put it plainly: “A document describes intent. A dataset is specification.”</p>
-<p style="margin: 20px 0 0; max-width: 34em">Deciding what a good answer sounds like, what it must never say, and when it should hand someone to a person is design work. This kit gives those decisions a place to be written down before the build, and a record of whether they held.</p>
-</div>
-</div>
-<div style="margin-top: 56px; border: 1px solid #2D0A3A">
-<div style="padding: 20px 28px; border-bottom: 1px solid #2D0A3A; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px">
-<p class="mono" style="margin: 0; color: #7B2FBE">PRE-007 · An example prediction for a support chatbot</p>
-<p class="mono" style="margin: 0; opacity: 0.75">Written before the prompt</p>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))">
-<div style="padding: 24px 28px; border-right: 1px solid #2D0A3A">
-<p class="mono" style="margin: 0">Every good answer</p>
-<p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">Quotes the price from the current price list, and says what’s included.</p>
-</div>
-<div style="padding: 24px 28px; border-right: 1px solid #2D0A3A">
-<p class="mono" style="margin: 0">No answer may</p>
-<p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">Invent a price, promise a delivery date, or settle a refund. Refunds go to a person.</p>
-</div>
-<div style="padding: 24px 28px">
-<p class="mono" style="margin: 0">It passes if</p>
-<p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">18 of 20 test questions are answered well, and none breaks a rule. One invented price fails it outright.</p>
-</div>
-</div>
-</div>
-<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px">
-<div>
-<p class="mono" style="margin: 0">How the forms map</p>
-<p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">The prediction is the eval. Each observation is an eval run: what the model actually said to the test questions. The decision is the call: ship it, change the prompt, or change the model, with the reason.</p>
-</div>
-<div>
-<p class="mono" style="margin: 0">Running on a real chatbot</p>
-<p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">Ask Bob, the chatbot on <a href="https://get-a-bob.com">get-a-bob.com</a>, is graded this way on twenty questions: the facts a good answer must carry, the claims it must never make, and the ones it hands back to a person.</p>
-</div>
-<div>
-<p class="mono" style="margin: 0">What it doesn’t do</p>
-<p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">The kit records evals; it doesn’t run them. Asking the model the questions and scoring the answers takes a test harness, which you bring.</p>
-</div>
-</div>
-<p style="margin: 40px 0 0; font-size: 14px; line-height: 20px; opacity: 0.8">Source: Lisa Murkin, <a href="https://www.mindtheproduct.com/evals-are-the-new-prd/">“Evals are the new PRD”</a>, Mind the Product, July 16, 2026.</p>
-</div>
-</section>
-
-<section id="loop" style="border-top: 2px solid #2D0A3A" aria-labelledby="loop-h">
-<div class="wrap" style="padding-top: 64px; padding-bottom: 96px">
-<div class="split">
-<div>
-<p class="mono" style="margin: 0; color: #7B2FBE">02 · The loop</p>
-<h2 id="loop-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 41px; line-height: 48px; letter-spacing: -0.015em">Six steps, and the first two happen on paper</h2>
-</div>
-<p style="margin: 0; max-width: 34em">Every change starts as a guess. Writing the guess down first, with the result that would prove it wrong, is what keeps a team from quietly changing what success meant once the numbers arrive.</p>
-</div>
-<div style="position: relative; margin-top: 72px">
-<div style="display: flex; align-items: flex-end; gap: 8px; width: calc(100% / 3); min-width: 220px">
-<span class="mono" style="color: #7B2FBE; white-space: nowrap">Written down before you build</span>
-</div>
-<div style="width: calc(100% / 3 - 24px); min-width: 220px; height: 12px; margin-top: 8px; border: 1.5px solid #7B2FBE; border-bottom: none" aria-hidden="true"></div>
-<div class="step-line" style="position: absolute; left: 18px; right: calc(100% / 6 - 18px); top: 92px; height: 1.5px; background: #2D0A3A" aria-hidden="true"></div>
-<ol class="steps" style="list-style: none; margin: 24px 0 0; padding: 0; position: relative">
-<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 15px">1</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Predict</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">What you expect to happen, as a number.</p></li>
-<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 15px">2</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Define failure</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">The result that would prove you wrong.</p></li>
-<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 15px">3</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Build the smallest test</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">Only as much as it takes to find out.</p></li>
-<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 15px">4</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Measure</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">What actually happened, from real use.</p></li>
-<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 15px">5</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Compare</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">The result against what you wrote in step 1.</p></li>
-<li style="padding-right: 20px"><span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #2D0A3A; color: #F5F0EC; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 15px">6</span><p class="mono" style="margin: 16px 0 0; font-weight: 600">Learn</p><p style="margin: 8px 0 0; font-size: 16px; line-height: 24px">Most of all when you were wrong.</p></li>
-</ol>
-</div>
-<p class="mono" style="margin: 72px 0 0; color: #7B2FBE">Example · a driverless ride service</p>
-<div class="examples" style="margin-top: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid #2D0A3A">
-<div style="padding: 24px 28px; border-right: 1px solid #2D0A3A">
-<p class="mono" style="margin: 0; opacity: 0.75">Can’t be proven wrong</p>
-<p style="margin: 8px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px; text-decoration: line-through; text-decoration-thickness: 2px">Riders will trust it.</p>
-</div>
-<div style="padding: 24px 28px; border-right: 1px solid #2D0A3A">
-<p class="mono" style="margin: 0; opacity: 0.75">Sounds like a number</p>
-<p style="margin: 8px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px; text-decoration: line-through; text-decoration-thickness: 2px">Rider NPS goes up.</p>
-<p style="margin: 12px 0 0; font-size: 16px; line-height: 24px">A Net Promoter Score asks whether riders say they’d recommend you, not what anyone did. And it only asks riders. The person crossing in front of the car never gets the survey.</p>
-</div>
-<div style="padding: 24px 28px">
-<p class="mono" style="margin: 0; color: #7B2FBE">Can be</p>
-<p style="margin: 8px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px">People crossing in front of it wait no longer than they do for a human driver. If they wait longer, we were wrong.</p>
-</div>
-</div>
-<p style="margin: 16px 0 0; font-size: 14px; line-height: 20px; opacity: 0.8; max-width: 52em">NPS came out of Fred Reichheld’s 2003 Harvard Business Review article, “The One Number You Need to Grow.” A 2007 study of 21 companies in the Journal of Marketing (Keiningham and others, “A Longitudinal Examination of Net Promoter and Firm Revenue Growth”) couldn’t reproduce that claim. It tracks satisfaction well enough; it just can’t settle a design.</p>
-<div style="margin-top: 40px; max-width: 40em">
-<p class="mono" style="margin: 0">In practice</p>
-<p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">Curious what this looks like on a real project? <a href="https://get-a-bob.com/case-studies/pulse-oximeter-research">A research program for a pulse oximeter app</a> planned the testing before anything was built, for a medical device maker: 80 people living with COPD or pulmonary fibrosis, a screener, and rounds that moved from remote prototype sessions to hour-long sessions with the app and the oximeter. It was proposed and never run, and the case study says so.</p>
-</div>
-</div>
-</section>
-
-<section id="kit" style="border-top: 2px solid #2D0A3A" aria-labelledby="kit-h">
-<div class="wrap" style="padding-top: 64px; padding-bottom: 96px">
-<div class="split">
-<div>
-<p class="mono" style="margin: 0; color: #7B2FBE">03 · What’s in it</p>
-<h2 id="kit-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 41px; line-height: 48px; letter-spacing: -0.015em">Three forms, one check, and a trace you own</h2>
-</div>
-<p style="margin: 0; max-width: 34em">Each form is a GitHub issue. When you send one, a GitHub Action gives it a number and adds a row to a spreadsheet file in your repository, so the record lives with your code. Track the work itself wherever you already do: GitHub, Jira or Linear.</p>
-</div>
-<ol class="forms" style="list-style: none; margin: 56px 0 0; padding: 0; border-top: 1px solid #2D0A3A; border-left: 1px solid #2D0A3A">
-<li style="padding: 28px; border-right: 1px solid #2D0A3A; border-bottom: 1px solid #2D0A3A">
-<p class="mono" style="margin: 0; color: #7B2FBE">Form 1 · PRE-001</p>
-<h3 style="margin: 12px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px">A prediction</h3>
-<p style="margin: 12px 0 0; font-size: 18px; line-height: 28px">What you believe will happen, the number that will settle it, and the result that would prove you wrong. Sent before any work starts.</p>
-</li>
-<li style="padding: 28px; border-right: 1px solid #2D0A3A; border-bottom: 1px solid #2D0A3A">
-<p class="mono" style="margin: 0; color: #7B2FBE">Form 2 · OBS-001</p>
-<h3 style="margin: 12px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px">An observation</h3>
-<p style="margin: 12px 0 0; font-size: 18px; line-height: 28px">What you saw: a session with a customer, a test result, a pull from your analytics. Each one points to the prediction it bears on.</p>
-</li>
-<li style="padding: 28px; border-right: 1px solid #2D0A3A; border-bottom: 1px solid #2D0A3A">
-<p class="mono" style="margin: 0; color: #7B2FBE">Form 3 · DEC-001</p>
-<h3 style="margin: 12px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px">A decision</h3>
-<p style="margin: 12px 0 0; font-size: 18px; line-height: 28px">What you decided and why, and how the prediction ended: it held, it was proved wrong, it was dropped, or we couldn’t tell. That closes the prediction in the log.</p>
-</li>
-</ol>
-<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px">
-<div>
-<p class="mono" style="margin: 0">The check</p>
-<p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">A pull request that doesn’t name a prediction can’t be merged. Nothing ships that wasn’t predicted first.</p>
-</div>
-<div>
-<p class="mono" style="margin: 0">The log</p>
-<p style="margin: 8px 0 0; font-size: 18px; line-height: 28px">Three spreadsheet files, one per form, in your repository: predictions, observations, decisions. Open them in anything.</p>
-</div>
-</div>
-<div style="margin-top: 56px; border: 1px solid #2D0A3A; padding: 28px">
-<p class="mono" style="margin: 0; color: #7B2FBE">The trace</p>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 16px; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 16px; line-height: 24px">
-<span style="padding: 6px 12px; background: #2D0A3A; color: #F5F0EC">PRE-001 prediction</span><span aria-hidden="true">→</span>
-<span style="padding: 6px 12px; border: 1px solid #2D0A3A">#42 pull request</span><span aria-hidden="true">→</span>
-<span style="padding: 6px 12px; border: 1px solid #2D0A3A">OBS-003 observation</span><span aria-hidden="true">→</span>
-<span style="padding: 6px 12px; border: 1px solid #2D0A3A">DEC-002 decision: it held</span>
-</div>
-<p style="margin: 16px 0 0; font-size: 18px; line-height: 28px; max-width: 40em">Because every form and pull request names the prediction it serves, the numbers join up by themselves: from what you expected, to what you built, to what you saw, to what you decided. The kit draws that as one table, the trace matrix, so nobody keeps it by hand.</p>
-</div>
-</div>
-</section>
-
-<section style="border-top: 2px solid #2D0A3A" aria-labelledby="rules-h">
-<div class="wrap" style="padding-top: 64px; padding-bottom: 96px">
-<p class="mono" style="margin: 0; color: #7B2FBE">04 · The rules</p>
-<h2 id="rules-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 41px; line-height: 48px; letter-spacing: -0.015em">Three, and they don’t bend</h2>
-<div class="rules" style="margin-top: 48px">
-<div style="border-top: 1px solid #2D0A3A; padding-top: 20px">
-<h3 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px">Predict before you look</h3>
-<p style="margin: 12px 0 0; font-size: 18px; line-height: 28px">A prediction written after the results is a story. Before, it’s a test.</p>
-</div>
-<div style="border-top: 1px solid #2D0A3A; padding-top: 20px">
-<h3 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px">Say what would prove you wrong</h3>
-<p style="margin: 12px 0 0; font-size: 18px; line-height: 28px">If no result could, it’s a belief, and the form won’t take it.</p>
-</div>
-<div style="border-top: 1px solid #2D0A3A; padding-top: 20px">
-<h3 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 25px; line-height: 32px">Being wrong counts</h3>
-<p style="margin: 12px 0 0; font-size: 18px; line-height: 28px">A prediction proved wrong is a finding. Log the surprises; they’re worth the most.</p>
-</div>
-</div>
-<p style="margin: 56px 0 0; max-width: 40em; font-size: 18px; line-height: 28px; opacity: 0.85">None of this is new, on purpose. Programmers write the failing test before the code, scientists pre-register studies, Lean UX writes design as hypotheses, and medical device makers keep a design history file (in FDA’s current rule, the design and development file) that traces every design input to its verification. What the kit adds is the habit made hard to skip: a form for each step, and a merge that waits for the prediction.</p>
-<p style="margin: 16px 0 0; max-width: 40em; font-size: 18px; line-height: 28px; font-weight: 700">Borrowed from FDA design controls, it is not a compliance tool: it has no signed approvals or change control, and its records are files anyone with access to the repository can edit.</p>
-</div>
-</section>
-
-<section style="border-top: 2px solid #2D0A3A" aria-labelledby="why-h">
-<div class="wrap" style="padding-top: 64px; padding-bottom: 96px">
-<div class="split">
-<div>
-<p class="mono" style="margin: 0; color: #7B2FBE">05 · Why this exists</p>
-<h2 id="why-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 41px; line-height: 48px; letter-spacing: -0.015em">You don’t have to make the world your test group</h2>
-</div>
-<div style="max-width: 34em">
-<p style="margin: 0">I’ve spent the 2020s surrounded by robots and glass: kiosks, chatbots and touchscreens that turn every errand into self-service. It’s isolating. And most of it reaches us as an open beta. It ships first and finds out later whether it works, and the people using it are the test.</p>
-<p style="margin: 20px 0 0">I live in Phoenix, where the beta is the street. Waymo’s cars have carried riders with nobody at the wheel since 2020, and took to the freeways in November 2025. DoorDash’s delivery robots ride the bike lanes and sidewalks of Tempe and Mesa. Tesla’s test cabs are on the roads I drive. The riders signed up. Most of the people they pass didn’t.</p>
-<p style="margin: 20px 0 0">It doesn’t have to be built that way. Write down what you expect before you ship, and what would prove you wrong. Try it on a few people who agreed to be asked, not on everyone. This kit is the smallest proof I could give away: a form, a check and a log, so nobody has to be a test subject who didn’t sign up.</p>
-<p class="mono" style="margin: 24px 0 0">Robert Duebelbeis · Good Citizens</p>
-</div>
-</div>
-</div>
-</section>
-
-<section id="start" style="border-top: 2px solid #2D0A3A; background: #2D0A3A; color: #F5F0EC" aria-labelledby="start-h">
-<div class="wrap" style="padding-top: 64px; padding-bottom: 96px">
-<p class="mono" style="margin: 0; color: #C9A2F0">06 · Start</p>
-<h2 id="start-h" style="margin: 16px 0 0; font-family: Archivo, sans-serif; font-weight: 800; font-size: 41px; line-height: 48px; letter-spacing: -0.015em">Your first prediction, in ten minutes</h2>
-<ol class="start" style="list-style: none; margin: 48px 0 0; padding: 0">
-<li style="border-top: 1px solid #F5F0EC; padding-top: 20px"><p class="mono" style="margin: 0; color: #C9A2F0">1</p><p style="margin: 8px 0 0">Use the template to make your own copy of the repository.</p></li>
-<li style="border-top: 1px solid #F5F0EC; padding-top: 20px"><p class="mono" style="margin: 0; color: #C9A2F0">2</p><p style="margin: 8px 0 0">Open a new issue, choose Prediction, and fill it in: what you expect, the number that settles it, and what would prove you wrong.</p></li>
-<li style="border-top: 1px solid #F5F0EC; padding-top: 20px"><p class="mono" style="margin: 0; color: #C9A2F0">3</p><p style="margin: 8px 0 0">Name its number, PRE-001, in the pull request that builds the test.</p></li>
-</ol>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 48px">
-<a href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit/generate" style="display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 24px; background: #F5F0EC; color: #2D0A3A; text-decoration: none; font-weight: 700"><span style="width: 12px; height: 12px; background: #FF2600" aria-hidden="true"></span>Use this template</a>
-<a href="https://github.com/Good-Citizens-Corporation/hypothesis-driven-design-kit" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border: 1px solid #F5F0EC; color: #F5F0EC; text-decoration: none; font-weight: 700">See the repository</a>
-</div>
-<p style="margin: 40px 0 0; font-size: 18px; line-height: 28px; max-width: 40em; opacity: 0.85">Not on GitHub? The method doesn’t need it. A spreadsheet with three tabs, one per form, does the same job.</p>
-</div>
-</section>
-
-<footer class="wrap" style="padding-top: 48px; padding-bottom: 64px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
-<p style="margin: 0; font-size: 16px; line-height: 24px; max-width: 36em">From the practice of <a href="https://get-a-bob.com/experience">Robert Duebelbeis</a>, who ran design this way on enterprise product teams for five years. Free from <a href="https://goodcitizens.us">Good Citizens</a>.</p>
-<p class="mono" style="margin: 0; opacity: 0.8">Make Good Work</p>
+<span aria-hidden="true">Work</span></a>
 </footer>
 
 </div>
